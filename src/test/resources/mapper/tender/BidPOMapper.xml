@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：投标单-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.tender.mapper.BidPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cndinfo.cndlct.ssp.repository.impl.tender.po.BidPO">
+        <id column="id" property="id"/>
+        <result column="bid_no" property="bidNo"/>
+        <result column="tender_id" property="tenderId"/>
+        <result column="round" property="round"/>
+        <result column="supplier_id" property="supplierId"/>
+        <result column="status" property="status"/>
+        <result column="result" property="result"/>
+        <result column="bid_time" property="bidTime"/>
+        <result column="bargain_count" property="bargainCount"/>
+        <result column="from_time" property="fromTime"/>
+        <result column="to_time" property="toTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="create_org" property="createOrg"/>
+        <result column="company_id" property="companyId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="account_org_id" property="accountOrgId"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="idx" property="idx"/>
+        <result column="credit_code" property="creditCode"/>
+        <result column="revision" property="revision"/>
+        <result column="reference_id" property="referenceId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, revision,reference_id,credit_code,bid_no, tender_id, round, supplier_id, status, result, bid_time,
+        bargain_count, from_time, to_time, create_time, create_user, update_time, update_user, data_status, tenant_id,
+        version, create_user_name, update_user_name, create_org, company_id, department_id, account_org_id, staff_id,
+        idx
+    </sql>
+    <select id="getFee" resultType="com.cndinfo.cndlct.ssp.tender.entity.BidQuoteFee">
+        select stfd.*,strd .amount referAmount,sbq.amount ,sbq1.amount lastAmount from ssp_tender_fee stf left join
+        ssp_tender_fee_detail stfd on stf.id=stfd .fee_id
+        left join ssp_tender_reference str on stfd .tender_id =str .tender_id
+        and str .round=#{query.round} and str.revision =#{prversion}
+        left join ssp_tender_reference_detail strd on strd.reference_id=str .id and strd .fee_id =stfd .fee_id and strd
+        .fee_code=stfd .fee_code
+        left join ssp_bid sb on sb.supplier_id =#{query.supplierId} and sb .round=#{query.round} and sb.revision
+        =#{rversion}
+        left join ssp_bid_quote sbq on sbq .tender_id =stfd.tender_id and stf .id=sbq .fee_id and sb.id=sbq .bid_id and
+        sbq .fee_code=stfd .fee_code
+        left join ssp_bid sb1 on sb1.supplier_id =#{query.supplierId} and sb1 .round=#{query.round} and sb1
+        .revision=(#{rversion}-1)
+        left join ssp_bid_quote sbq1 on sbq1 .tender_id =stfd.tender_id and stf .id=sbq1 .fee_id and sb1.id=sbq1 .bid_id
+        and sbq1 .fee_code=stfd .fee_code
+        where stfd.tender_id =#{query.tenderId}
+        order by stfd.create_time
+    </select>
+
+    <!-- 查询revision最大值的bid -->
+    <select id="queryByRevision" resultType="com.cndinfo.cndlct.ssp.tender.entity.Bid">
+        select * from ssp_bid
+        where 1=1
+        <if test="tenderId !=null">
+            and tender_id = #{tenderId}
+        </if>
+        <if test="round !=null">
+            and round = #{round}
+        </if>
+        <if test="supplierId !=null">
+            and supplier_id = #{supplierId}
+        </if>
+        order by revision desc limit 1
+    </select>
+
+</mapper>

@@ -1,34 +1,5 @@
 package org.sonarsource.plugins.mybatis.rules;
 
-import static org.sonarsource.plugins.mybatis.MyBatisPlugin.SONAR_MYBATIS_SKIP;
-import static org.sonarsource.plugins.mybatis.MyBatisPlugin.STMTID_EXCLUDE_KEY;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.builder.xml.XMLMapperBuilder;
-import org.apache.ibatis.mapping.BoundSql;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.SqlCommandType;
-import org.apache.ibatis.mapping.SqlSource;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentType;
-import org.dom4j.Element;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -41,12 +12,17 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.xml.Xml;
-import org.sonarsource.plugins.mybatis.Constant;
-import org.sonarsource.plugins.mybatis.utils.IOUtils;
-import org.sonarsource.plugins.mybatis.xml.MyBatisMapperXmlHandler;
-import org.sonarsource.plugins.mybatis.xml.XmlParser;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
+import org.sonarsource.plugins.mybatis.sql.RuleCheckResult;
+import org.sonarsource.plugins.mybatis.wang.parser.XmlBatisSqlParser;
+import org.sonarsource.plugins.mybatis.wang.pojo.XmlParseResult;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.sonarsource.plugins.mybatis.MyBatisPlugin.SONAR_MYBATIS_SKIP;
+
+
 
 /**
  * The goal of this Sensor is analysis mybatis mapper files and generate issues.
@@ -94,196 +70,28 @@ public class MyBatisLintSensor implements Sensor {
             LOGGER.info("MyBatis sensor is skiped.");
             return;
         }
-        String[] stmtIdExclude = config.getStringArray(STMTID_EXCLUDE_KEY);
-        Collections.addAll(stmtIdExcludeList, stmtIdExclude);
-        LOGGER.info("stmtIdExcludeList: " + stmtIdExcludeList.toString());
         // analysis mybatis mapper files and generate issues
-        Map mybatisMapperMap = new HashMap(16);
-        List<File> reducedFileList = new ArrayList<>();
-
-        org.apache.ibatis.session.Configuration mybatisConfiguration = new org.apache.ibatis.session.Configuration();
-
-        // handle mybatis mapper file and add it to mybatisConfiguration
         FileSystem fs = context.fileSystem();
+        fs.baseDir();
         Iterable<InputFile> xmlInputFiles = fs.inputFiles(fs.predicates().hasLanguage("xml"));
+        List<String> mapperFiles = new ArrayList<>();
         for (InputFile xmlInputFile : xmlInputFiles) {
             String xmlFilePath = xmlInputFile.uri().getPath();
-            File xmlFile = new File(xmlFilePath);
-            try {
-                XmlParser xmlParser = new XmlParser();
-                Document document = xmlParser.parse(xmlFile);
-                Element rootElement = document.getRootElement();
-                String publicIdOfDocType = "";
-                DocumentType documentType = document.getDocType();
-                if (null != documentType) {
-                    publicIdOfDocType = documentType.getPublicID();
-                    if (null == publicIdOfDocType) {
-                        publicIdOfDocType = "";
-                    }
-                }
-                if ("mapper".equals(rootElement.getName()) && publicIdOfDocType.contains("mybatis.org")) {
-                    LOGGER.info("handle mybatis mapper xml:" + xmlFilePath);
-                    // handle mybatis mapper file
-                    String reducedXmlFilePath = xmlFilePath + "-reduced.xml";
-                    File reducedXmlFile = new File(reducedXmlFilePath);
-                    reducedFileList.add(reducedXmlFile);
-                    MyBatisMapperXmlHandler myBatisMapperXmlHandler = new MyBatisMapperXmlHandler();
-                    myBatisMapperXmlHandler.handleMapperFile(xmlFile, reducedXmlFile);
-                    mybatisMapperMap.put(reducedXmlFilePath, xmlFilePath);
-                    // xmlMapperBuilder parse mapper resource
-                    Resource mapperResource = new FileSystemResource(reducedXmlFile);
-                    XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(mapperResource.getInputStream(),
-                        mybatisConfiguration, mapperResource.toString(), mybatisConfiguration.getSqlFragments());
-                    xmlMapperBuilder.parse();
-                }
-            } catch (DocumentException | IOException e) {
-                LOGGER.warn(e.toString());
+            mapperFiles.add(xmlFilePath);
+        }
+        XmlBatisSqlParser xmlBatisSqlParser = new XmlBatisSqlParser();
+        List<XmlParseResult> results = xmlBatisSqlParser.parseXml(mapperFiles, null, "mysql");
+        List<ErrorDataFromLinter> mybatisError = new ArrayList<>();
+        for (XmlParseResult temp : results) {
+            for (RuleCheckResult r : temp.getXmlNodeParserResult().getRuleCheckResults()) {
+                ErrorDataFromLinter errorData = new ErrorDataFromLinter(r.getRuleId(), r.getObj(), temp.getMapperFilePath(), temp.getLineNumber());
+                mybatisError.add(errorData);
             }
         }
-
-        // parse MappedStatements
-        Set<MappedStatement> stmts = new HashSet<>(mybatisConfiguration.getMappedStatements());
-        parseStatement(stmts, mybatisMapperMap);
-
-        // clean reduced.xml
-        cleanFiles(reducedFileList);
-    }
-
-    private void parseStatement(Set<MappedStatement> stmts, Map mybatisMapperMap) {
-        for (Iterator<MappedStatement> iter = stmts.iterator(); iter.hasNext();) {
-            MappedStatement stmt = null;
-            try {
-                stmt = iter.next();
-            } catch (Exception e) {
-                LOGGER.warn(e.toString());
-            }
-            if (null != stmt) {
-                if (stmt.getSqlCommandType() == SqlCommandType.SELECT
-                    || stmt.getSqlCommandType() == SqlCommandType.UPDATE
-                    || stmt.getSqlCommandType() == SqlCommandType.DELETE) {
-                    SqlSource sqlSource = stmt.getSqlSource();
-                    BoundSql boundSql = null;
-                    try {
-                        boundSql = sqlSource.getBoundSql(null);
-                    } catch (Exception e) {
-                        LOGGER.warn(e.getMessage());
-                    }
-                    if (null != boundSql) {
-                        String sql = boundSql.getSql();
-                        String stmtId = stmt.getId();
-                        if (!StringUtils.endsWith(stmtId, "!selectKey")) {
-                            sql = sql.replaceAll("\\n", "");
-                            sql = sql.replaceAll("\\s{2,}", " ");
-                            final String mapperResource = stmt.getResource();
-                            String reducedXmlFilePath = mapperResource.substring(mapperResource.indexOf('[') + 1,
-                                    mapperResource.indexOf(']'));
-
-                            // windows environment
-                            if (!reducedXmlFilePath.startsWith(LEFT_SLASH)) {
-                                reducedXmlFilePath = LEFT_SLASH + reducedXmlFilePath.replace("\\", LEFT_SLASH);
-                            }
-                            LOGGER.debug("reducedMapperFilePath: " + reducedXmlFilePath);
-
-                            final String sourceMapperFilePath = (String) mybatisMapperMap.get(reducedXmlFilePath);
-
-                            LOGGER.info("stmtId=" + stmtId);
-                            LOGGER.info("sql=" + sql);
-
-                            if (stmtIdExcludeList.contains(stmtId)) {
-                                LOGGER.info("stmt id exclude:" + stmtId);
-                            } else {
-                                // get lineNumber by mapper file and keyWord
-                                final String[] stmtIdSplit = stmtId.split("\\.");
-                                final String stmtIdTail = stmtIdSplit[stmtIdSplit.length - 1];
-                                final String sqlCmdType = stmt.getSqlCommandType().toString().toLowerCase();
-                                LOGGER.debug("sourceMapperFilePath: " + sourceMapperFilePath + " stmtIdTail:  "
-                                        + stmtIdTail + " sqlCmdType: " + sqlCmdType);
-                                final int lineNumber = getLineNumber(sourceMapperFilePath, stmtIdTail, sqlCmdType);
-                                // match Rule And Save Issue
-                                matchRuleAndSaveIssue(sql, sourceMapperFilePath, lineNumber);
-                            }
-                        }
-                    }
-                }
-            }
+        for (ErrorDataFromLinter err : mybatisError) {
+            getResourceAndSaveIssue(err);
         }
 
-    }
-
-    private void cleanFiles(List<File> files) {
-        for (File file : files) {
-            if (file.exists() && file.isFile()) {
-                try {
-                    Files.delete(Paths.get(new URI("file:///" + file.getAbsolutePath().replace("\\", LEFT_SLASH))));
-                } catch (IOException | URISyntaxException e) {
-                    LOGGER.warn(e.toString());
-                }
-            }
-        }
-    }
-
-    private int getLineNumber(final String filePath, final String stmtIdTail, final String sqlCmdType) {
-        return IOUtils.getLineNumber(filePath, stmtIdTail, sqlCmdType);
-    }
-
-    private void matchRuleAndSaveIssue(String sql, String sourceMapperFilePath, Integer lineNumber) {
-        sql = sql.toLowerCase();
-        String errorMessage = "";
-        String ruleId = "";
-        if (containsOneEqualsOne(sql)) {
-            if (sql.startsWith(DELETE)) {
-                // delete statement contains 1=1
-                errorMessage = "delete statement should not include 1=1";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_03;
-            } else if (sql.startsWith(UPDATE)) {
-                // update statement contains 1=1
-                errorMessage = "update statement should not include 1=1";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_02;
-            } else if (sql.startsWith(SELECT) && !containsFunctionOrLimit(sql)) {
-                // select statement contains 1=1
-                errorMessage = "select statement should not include 1=1";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_01;
-            }
-        } else if (!sql.contains(WHERE)) {
-            if (sql.startsWith(DELETE)) {
-                // Where condition not found in delete statement
-                errorMessage = "where condition not found in delete statement";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_06;
-            } else if (sql.startsWith(UPDATE)) {
-                // Where condition not found in update statement
-                errorMessage = "where condition not found in update statement";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_05;
-            } else if (sql.startsWith(SELECT) && !containsFunctionOrLimit(sql)) {
-                // Where condition not found in select statement
-                errorMessage = "where condition not found in select statement";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_04;
-            }
-        }
-
-        if (sql.startsWith(SELECT) && sql.contains(STAR)) {
-            sql = sql.replace(" ", "");
-            if (!sql.contains(COUNT_STAR)) {
-                errorMessage = "select statement should not include *";
-                ruleId = Constant.MYBATIS_MAPPER_CHECK_RULE_07;
-            }
-        }
-
-        if (!"".equals(ruleId)) {
-            LOGGER.debug("ruleId=" + ruleId + " errorMessage=" + errorMessage + " filePath=" + sourceMapperFilePath + " line="
-                    + lineNumber);
-            ErrorDataFromLinter mybatisError = new ErrorDataFromLinter(ruleId, errorMessage, sourceMapperFilePath,
-                    lineNumber);
-            getResourceAndSaveIssue(mybatisError);
-        }
-    }
-
-    private boolean containsOneEqualsOne(String sql) {
-        return sql.contains("1=1") || sql.contains("1 = 1") || sql.contains("1= 1") || sql.contains("1 =1");
-    }
-
-    private boolean containsFunctionOrLimit(String sql) {
-        return sql.contains("sum(") || sql.contains("count(") || sql.contains("max(") || sql.contains("min(")
-            || sql.contains("limit");
     }
 
     private void getResourceAndSaveIssue(final ErrorDataFromLinter error) {

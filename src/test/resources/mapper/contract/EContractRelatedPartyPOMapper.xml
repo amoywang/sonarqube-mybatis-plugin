@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：电子合同关联方-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.contract.mapper.EContractRelatedPartyPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cndinfo.cndlct.ssp.repository.impl.contract.po.EContractRelatedPartyPO">
+        <id column="id" property="id"/>
+        <result column="e_contract_id" property="eContractId"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="credit_code" property="creditCode"/>
+        <result column="enterprise_name" property="enterpriseName"/>
+        <result column="signed" property="signed"/>
+        <result column="sign_time" property="signTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, e_contract_id, subject_name, merchant_id, credit_code, enterprise_name, signed, sign_time, create_time,
+        create_user, update_time, update_user, data_status, tenant_id, version
+    </sql>
+
+</mapper>

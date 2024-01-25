@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：企业授权-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.business.merchant.mapper.MerchantEnterpriseAuthorizationPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap"
+               type="com.cndinfo.cndlct.ssp.repository.impl.business.merchant.po.MerchantEnterpriseAuthorizationPO">
+        <id column="id" property="id"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="credit_code" property="creditCode"/>
+        <result column="e_sign_contract_id" property="eSignContractId"/>
+        <result column="primary" property="primary"/>
+        <result column="authorized" property="authorized"/>
+        <result column="valid" property="valid"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="create_org" property="createOrg"/>
+        <result column="company_id" property="companyId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="account_org_id" property="accountOrgId"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="idx" property="idx"/>
+        <result column="primary_merchant_id" property="primaryMerchantId"/>
+        <result column="audit_status" property="auditStatus"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, merchant_id, credit_code, e_sign_contract_id, primary, authorized, valid, create_time, create_user,
+        update_time, update_user, data_status, tenant_id, version, create_user_name, update_user_name, create_org,
+        company_id, department_id, account_org_id, staff_id, idx, primary_merchant_id, audit_status
+    </sql>
+
+    <select id="countByMerchatId" resultType="java.lang.Integer">
+        select count(*) from ssp_merchant_enterprise_authorization where merchant_id =#{merchatId} and `primary` like
+        'y'
+    </select>
+
+    <select id="getPrimary" resultMap="BaseResultMap">
+        select * from ssp_merchant_enterprise_authorization smea where smea.merchant_id = #{id} and smea .`primary` ="y"
+    </select>
+
+    <select id="queryEnterpriseApplyPage"
+            resultType="com.cndinfo.cndlct.ssp.system.entity.EnterpriseAuthorizationApply">
+        select smea.authorized, smea.`primary`, smea.audit_status applyStatus , smea.create_time applyTime
+        ,smea.update_time auditTime ,smea.id enterpriseId ,
+        sm.name merchantName, sm.original_name originalMerchantName,
+        sei.name enterpriseName,
+        smc.name contactName, smc.telephone
+        from ssp_merchant_enterprise_authorization smea
+        left join ssp_merchant sm on smea.merchant_id =sm.id and sm.data_status =0
+        left join ssp_enterprise_information sei on smea.credit_code =sei.credit_code and sei.data_status =0
+        left join ssp_merchant_contact smc on smea.merchant_id =smc.merchant_id and smc.data_status =0 and smc.`primary`
+        ="y"
+        <where>
+            <if test="enterpriseAuthorizationApplyParameterEntity.merchantName!=null and !enterpriseAuthorizationApplyParameterEntity.merchantName.isBlank()">
+                sm.name like (concat ('%',#{enterpriseAuthorizationApplyParameterEntity.merchantName},'%'))
+            </if>
+
+            <if test="enterpriseAuthorizationApplyParameterEntity.originalMerchantName!=null and !enterpriseAuthorizationApplyParameterEntity.originalMerchantName.isBlank()">
+                and sm.original_name like (concat
+                ('%',#{enterpriseAuthorizationApplyParameterEntity.originalMerchantName},'%'))
+            </if>
+
+            <if test="enterpriseAuthorizationApplyParameterEntity.enterpriseName!=null and !enterpriseAuthorizationApplyParameterEntity.enterpriseName.isBlank()">
+                and sei.name like (concat ('%',#{enterpriseAuthorizationApplyParameterEntity.enterpriseName},'%'))
+            </if>
+
+            <if test="enterpriseAuthorizationApplyParameterEntity.contactName!=null and !enterpriseAuthorizationApplyParameterEntity.contactName.isBlank()">
+                and smc.name like (concat ('%',#{enterpriseAuthorizationApplyParameterEntity.contactName},'%'))
+            </if>
+
+            <if test="enterpriseAuthorizationApplyParameterEntity.applyTime!=null">
+                and Date(smea.create_time)=#{enterpriseAuthorizationApplyParameterEntity.applyTime}
+            </if>
+        </where>
+        order by smea.create_time
+    </select>
+
+    <update id="changeStatus">
+        update ssp_merchant_enterprise_authorization a set a.audit_status = #{applyStatus} where a.id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="countAuthorizeByMerchantId" resultType="java.lang.Integer">
+        select count(*) from ssp_merchant_enterprise_authorization where merchant_id =#{merchatId} and `primary` like
+        'y'
+    </select>
+
+    <select id="queryEnterpriseAuthorizationPage"
+            resultType="com.cndinfo.cndlct.ssp.system.entity.EnterpriseInformation">
+        select smea.id enterpriseId, smea.`primary` isPrimary, smea.authorized isAuthorization,
+        sei.name enterpriseName, sei.legal_representative, sei.credit_code, sei.address
+        from ssp_merchant_enterprise_authorization smea
+        left join ssp_enterprise_information sei on sei.credit_code =smea.credit_code and sei.data_status =0
+        <where>
+            smea.data_status =0
+            <if test="queryMerchantEnterpriseAuthorizationEntity.merchantId!=null and !queryMerchantEnterpriseAuthorizationEntity.merchantId.isBlank()">
+                and smea .merchant_id =#{queryMerchantEnterpriseAuthorizationEntity.merchantId}
+            </if>
+        </where>
+        order by smea.create_time desc
+    </select>
+
+</mapper>

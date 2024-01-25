@@ -6,34 +6,20 @@
     <groupId>org.sonarsource.plugins.mybatis</groupId>
     <artifactId>sonar-mybatis-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <name>MyBatis Plugin for SonarQube</name>
     <description>Rules to check SQL statements in MyBatis Mapper XML files</description>
-    <url>https://github.com/donhui/sonar-mybatis</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://opensource.org/licenses/Apache-2.0</url>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <id>donhui</id>
-            <name>donghui</name>
-            <email>977675308@qq.com</email>
-            <url>https://github.com/donhui</url>
-        </developer>
-    </developers>
+    <url>https://git.cndinfo.com/ops/sonar-mybatis</url>
     <scm>
-        <url>https://github.com/donhui/sonar-mybatis</url>
+        <url>https://git.cndinfo.com/ops/sonar-mybatis</url>
     </scm>
     <issueManagement>
-        <url>https://github.com/donhui/sonar-mybatis/issues</url>
+        <url>https://git.cndinfo.com/ops/sonar-mybatis/issues</url>
     </issueManagement>
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.com/donhui/sonar-mybatis</url>
+        <url>https://git.cndinfo.com/ops/sonar-mybatis</url>
     </ciManagement>
 
     <properties>
@@ -55,7 +41,12 @@
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
         </dependency>
-
+        <!-- sql parser: druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.21</version>
+        </dependency>
         <!-- mybatis and spring-core -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -88,6 +79,55 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>org.apache.directory.studio</groupId>
+            <artifactId>org.dom4j.dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.68</version>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.11</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.0-alpha1</version>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>2.0.0-alpha1</version>
+        </dependency>
         <!-- unit tests -->
         <dependency>
             <groupId>org.sonarsource.sonarqube</groupId>
@@ -101,6 +141,13 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.8.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

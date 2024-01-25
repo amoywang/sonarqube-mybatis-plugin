@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：服务能力-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.business.merchant.mapper.MerchantCapabilityPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap"
+               type="com.cndinfo.cndlct.ssp.repository.impl.business.merchant.po.MerchantCapabilityPO">
+        <id column="id" property="id"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="service_type" property="serviceType"/>
+        <result column="capacity_template_id" property="capacityTemplateId"/>
+        <result column="base_field_value" property="baseFieldValue"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="create_org" property="createOrg"/>
+        <result column="company_id" property="companyId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="account_org_id" property="accountOrgId"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="idx" property="idx"/>
+        <result column="enterprise_id" property="enterpriseId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, merchant_id, service_type, capacity_template_id, base_field_value, create_time, create_user, update_time,
+        update_user, data_status, tenant_id, version, create_user_name, update_user_name, create_org, company_id,
+        department_id, account_org_id, staff_id, idx, enterpriseId
+    </sql>
+    <select id="queryEnterprise" resultType="java.lang.String">
+        select sei.name from ssp_merchant_enterprise_authorization smea
+        left join ssp_enterprise_information sei on smea.credit_code =sei.credit_code and sei.data_status =0
+        where smea.id in
+        (select smc.enterprise_id from ssp_merchant_capability smc
+        where merchant_id =#{merchantId} and smc.service_type =#{capabilityType})
+        and smea.data_status =0
+    </select>
+
+</mapper>

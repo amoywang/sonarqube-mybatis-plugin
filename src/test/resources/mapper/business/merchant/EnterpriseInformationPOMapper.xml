@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：工商信息-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.business.merchant.mapper.EnterpriseInformationPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap"
+               type="com.cndinfo.cndlct.ssp.repository.impl.business.merchant.po.EnterpriseInformationPO">
+        <id column="id" property="id"/>
+        <result column="credit_code" property="creditCode"/>
+        <result column="name" property="name"/>
+        <result column="name_en" property="nameEn"/>
+        <result column="type" property="type"/>
+        <result column="reg_no" property="regNo"/>
+        <result column="regist_capital" property="registCapital"/>
+        <result column="district_code" property="districtCode"/>
+        <result column="address" property="address"/>
+        <result column="establishment_date" property="establishmentDate"/>
+        <result column="business_status" property="businessStatus"/>
+        <result column="business_form_date" property="businessFormDate"/>
+        <result column="business_to_date" property="businessToDate"/>
+        <result column="legal_representative" property="legalRepresentative"/>
+        <result column="legal_title" property="legalTitle"/>
+        <result column="country" property="country"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="create_org" property="createOrg"/>
+        <result column="company_id" property="companyId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="account_org_id" property="accountOrgId"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="idx" property="idx"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, credit_code, name, name_en, type, reg_no, regist_capital, district_code, address, establishment_date,
+        business_status, business_form_date, business_to_date, legal_representative, legal_title, country, create_time,
+        create_user, update_time, update_user, data_status, tenant_id, version, create_user_name, update_user_name,
+        create_org, company_id, department_id, account_org_id, staff_id, idx
+    </sql>
+
+    <select id="queryByCreditCode">
+
+    </select>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：招标单评标结果-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.tender.mapper.TenderResultPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cndinfo.cndlct.ssp.repository.impl.tender.po.TenderResultPO">
+        <id column="id" property="id"/>
+        <result column="tender_id" property="tenderId"/>
+        <result column="round" property="round"/>
+        <result column="reviewer" property="reviewer"/>
+        <result column="review_time" property="reviewTime"/>
+        <result column="status" property="status"/>
+        <result column="reason" property="reason"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="create_org" property="createOrg"/>
+        <result column="company_id" property="companyId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="account_org_id" property="accountOrgId"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="idx" property="idx"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, tender_id, round, reviewer, review_time, status, reason, create_time, create_user, update_time, update_user,
+        data_status, tenant_id, version, create_user_name, update_user_name, create_org, company_id, department_id,
+        account_org_id, staff_id, idx
+    </sql>
+
+</mapper>

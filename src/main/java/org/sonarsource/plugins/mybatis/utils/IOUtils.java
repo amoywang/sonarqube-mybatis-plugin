@@ -1,13 +1,13 @@
 package org.sonarsource.plugins.mybatis.utils;
 
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.nio.charset.StandardCharsets;
-
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 public class IOUtils {
 
@@ -22,22 +22,20 @@ public class IOUtils {
      * 
      * @param filePath
      * @param stmtId
-     * @param sqlCmdType
      * @return
      */
-    public static int getLineNumber(final String filePath, final String stmtId, final String sqlCmdType) {
+    public static int getLineNumber(final String filePath, final String stmtId) {
         int lineNumber = 1;// numero mayor a cero en caso que "no se llame"
-        final String sqlCmdTypeAux = "<" + sqlCmdType;
+//        final String sqlCmdTypeAux = "<" + sqlCmdType;
         final String stmtIdAuxDoublequote = stmtId + "\"";
         final String stmtIdAuxSimplequote = stmtId + "\'";
-        LOGGER.debug("filePath: " + filePath + " stmtId: " + stmtId + " sqlCmdType: " + sqlCmdType);
+        LOGGER.debug("filePath: " + filePath + " stmtId: ");
         try (LineNumberReader lineNumberReader = new LineNumberReader(
                 new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
             String readLine = null;
             while ((readLine = lineNumberReader.readLine()) != null) {
                 // check if contains
-                if (readLine.toLowerCase().contains(sqlCmdTypeAux)
-                        && (readLine.contains(stmtIdAuxDoublequote) || readLine.contains(stmtIdAuxSimplequote))) {
+                if ((readLine.contains(stmtIdAuxDoublequote) || readLine.contains(stmtIdAuxSimplequote))) {
                     lineNumber = lineNumberReader.getLineNumber();
                     break;
                 }

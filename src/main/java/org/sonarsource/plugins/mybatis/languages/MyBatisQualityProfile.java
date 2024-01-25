@@ -1,9 +1,12 @@
 package org.sonarsource.plugins.mybatis.languages;
 
-import org.sonar.api.rule.Severity;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.plugins.xml.Xml;
-import org.sonarsource.plugins.mybatis.Constant;
+import org.sonarsource.plugins.mybatis.sql.AbstractRule;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
 
 import static org.sonarsource.plugins.mybatis.rules.MyBatisLintRulesDefinition.REPO_KEY;
 
@@ -16,28 +19,15 @@ public final class MyBatisQualityProfile implements BuiltInQualityProfilesDefini
     public void define(Context context) {
         NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("MyBatisLint Rules", Xml.KEY);
         profile.setDefault(true);
-
-        NewBuiltInActiveRule rule01 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_01);
-        rule01.overrideSeverity(Severity.MINOR);
-
-        NewBuiltInActiveRule rule02 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_02);
-        rule02.overrideSeverity(Severity.MAJOR);
-
-        NewBuiltInActiveRule rule03 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_03);
-        rule03.overrideSeverity(Severity.CRITICAL);
-
-        NewBuiltInActiveRule rule04 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_04);
-        rule04.overrideSeverity(Severity.MINOR);
-
-        NewBuiltInActiveRule rule05 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_05);
-        rule05.overrideSeverity(Severity.MAJOR);
-
-        NewBuiltInActiveRule rule06 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_06);
-        rule06.overrideSeverity(Severity.CRITICAL);
-
-        NewBuiltInActiveRule rule07 = profile.activateRule(REPO_KEY, Constant.MYBATIS_MAPPER_CHECK_RULE_07);
-        rule07.overrideSeverity(Severity.MINOR);
-
+        Map<String, String> rules = new HashMap<String, String>();
+        ServiceLoader<AbstractRule> mybatisCheckRuleClasses = ServiceLoader.load(AbstractRule.class, AbstractRule.class.getClassLoader());
+        for (AbstractRule rule : mybatisCheckRuleClasses) {
+            rules.put(rule.getRuleID(), rule.getSeverity());
+        }
+        for (Map.Entry<String, String> entry : rules.entrySet()) {
+            NewBuiltInActiveRule buildInRule = profile.activateRule(REPO_KEY, entry.getKey());
+            buildInRule.overrideSeverity(entry.getValue());
+        }
         profile.done();
     }
 

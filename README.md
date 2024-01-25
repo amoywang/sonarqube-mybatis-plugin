@@ -1,10 +1,3 @@
-[![Build Status](https://travis-ci.com/donhui/sonar-mybatis.svg?branch=master)](https://travis-ci.com/donhui/sonar-mybatis)
-[![SonarCloud Status](https://sonarcloud.io/api/project_badges/measure?project=donhui_sonar-mybatis&metric=alert_status)](https://sonarcloud.io/dashboard?id=donhui_sonar-mybatis)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/donhui/sonar-mybatis)](https://github.com/donhui/sonar-mybatis/releases/)
-[![GitHub All Releases](https://img.shields.io/github/downloads/donhui/sonar-mybatis/total)](https://github.com/donhui/sonar-mybatis/releases/)
-
-[README 中文版](README.zh.md)
-
 ## SonarQube MyBatis Plugin
 MyBatis Plugin for SonarQube: Rules to check SQL statements in MyBatis Mapper XML files.
 
@@ -28,26 +21,12 @@ WHERE 1=1
 ## MyBatis Rules
 There are 7 built-in mybatis rules, which select statement has three rules, update and delete statement has two rules.
 
-![mybatis-rules](images/mybatis-rules.png)
+![mybatis-rules](images/mybatis-rule.png)
 
 ## How to install it?
 There are two options to install a plugin into SonarQube:
 - Marketplace - Installs plugins automatically, from the SonarQube UI.
 - Manual Installation - You'll use this method if your SonarQube instance doesn't have access to the Internet.
-
-### Marketplace
-If you have access to the Internet and you are connected with a SonarQube user having the Global Permission "Administer System", you can go to Administration > Marketplace.
-- Find the plugin by search `mybatis`
-- Click on Install and wait for the download to be processed
-
-Once download is complete, a "Restart" button will be available to restart your instance.
-
-### Manual Installation
-The plugin can be downloaded from [github release](https://github.com/donhui/sonar-mybatis/releases/) .
-
-Put the downloaded jar in `$SONARQUBE_HOME/extensions/plugins`, removing any previous versions of the same plugins.
-
-Once done, you will need to restart your SonarQube Server.
 
 ## How to Use it?
 There is an example of using maven build command:
@@ -56,20 +35,17 @@ mvn clean compile -U -Dmaven.test.skip=true -Dmaven.javadoc.skip=true sonar:sona
 ```
 To analysis mybatis mapper file, `src/main/resources` dir must be in `sonar.sources`.
 
-## Support Global Stmt ID Exclude
-For special issues of statements, if you want ignore them, you can put the statement id with namespace into the global stmt id exclude list.
-
-![stmt-id-exclude](images/stmt-id-exclude.png)
-
 ## Skip MyBatis Sensor
 If you want to skip mybatis sensor sometimes, you can change the global properties `sonar.mybatis.skip` to `true` or add the parameter in the command:
 `-Dsonar.mybatis.skip=true` .
 
-## Contribute
-Please report bugs and feature requests at https://github.com/donhui/sonar-mybatis/issues.
+## Check result
 
-Or you can submit pull requests for fix bugs or create new features, any contribution is welcome.
+![mybatis-rules](images/check-result.png)
 
-# Stargazers over time
+## How to Add New Rule
 
-[![Stargazers over time](https://starchart.cc/donhui/sonar-mybatis.svg)](https://starchart.cc/donhui/sonar-mybatis)
+
+- add new rule class extend AbstractRule under folder [src/main/java/org/sonarsource/plugins/mybatis/sql/rules]
+- specify the rule in the rule Class
+- add the rule full name in file [src/main/resources/META-INF/services/org.sonarsource.plugins.mybatis.sql.AbstractRule] to regist the rule

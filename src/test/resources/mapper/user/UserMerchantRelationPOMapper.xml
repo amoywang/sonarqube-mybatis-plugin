@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：用户商户关系-Mapper -->
+<mapper namespace="com.cndinfo.cndlct.ssp.repository.impl.user.mapper.UserMerchantRelationPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cndinfo.cndlct.ssp.repository.impl.user.po.UserMerchantRelationPO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="role" property="role"/>
+        <result column="primary" property="primary"/>
+        <result column="enabled" property="enabled"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="audit_user" property="auditUser"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="version" property="version"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="create_org" property="createOrg"/>
+        <result column="company_id" property="companyId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="account_org_id" property="accountOrgId"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="idx" property="idx"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, merchant_id, role, primary, enabled, audit_status, audit_user, audit_time, create_time,
+        create_user, update_time, update_user, data_status, tenant_id, version, create_user_name, update_user_name,
+        create_org, company_id, department_id, account_org_id, staff_id, idx
+    </sql>
+
+    <select id="userMerchantInformationPage" resultType="com.cndinfo.cndlct.ssp.user.entity.UserMerchantInformation">
+        <!--select u.real_name,u.telephone,u.user_id,r.role,r.enabled,r.audit_user,r.audit_time from ssp_user_merchant_relation r left join ssp_user u on r.user_id  =u.user_id-->
+        select u.real_name,u.telephone,r.id,u.user_id,r.role,r.enabled,r.audit_user,r.audit_time,(case when
+        r.role='1735199540702741504' then 1 else 0 end)sort from ssp_user_merchant_relation r left join ssp_user u on
+        r.user_id =u.user_id
+        <where>
+            <if test="entity.merchantId !=null and entity.merchantId !=''">
+                r.merchant_id =#{entity.merchantId}and r.data_status =0
+            </if>
+            <if test="entity.realName !=null and entity.realName!=''">
+                and (u.real_name like (concat ('%',#{entity.realName},'%')) or u.telephone like (concat
+                ('%',#{entity.realName},'%')))
+            </if>
+        </where>
+        <!-- order by r.audit_time-->
+        order by sort desc ,audit_time desc
+    </select>
+
+
+    <select id="userMerchantAuditPage" resultType="com.cndinfo.cndlct.ssp.user.entity.UserMerchantAudit">
+        <!--select u.real_name,u.telephone,r.* from ssp_user_merchant_relation r left join ssp_user u on r.user_id  =u.user_id-->
+        <!-- select u.real_name,u.telephone,r.audit_status,r.create_time,r.audit_time from ssp_user_merchant_relation r left join ssp_user u on r.user_id  =u.user_id-->
+        select u.real_name,u.telephone,smma.audit_result,smma.create_time,smma.audit_time,smma.reason,smma.id
+        from ssp_merchant_member_application smma
+        left join ssp_user u on smma.user_id =u.user_id and u.data_status =0
+        <where>
+            <if test="userMerchantRelation.merchantId !=null and userMerchantRelation.merchantId !=''">
+                smma.merchant_id =#{userMerchantRelation.merchantId} and smma.data_status =0
+            </if>
+            <choose>
+                <when test="userMerchantRelation.auditTime !=null">
+                    and smma.audit_time is not null
+                </when>
+                <otherwise>
+                    and smma.audit_time is null
+                </otherwise>
+            </choose>
+        </where>
+        order by smma.audit_time desc
+    </select>
+
+
+    <select id="userMerchantRelationPageQuery" resultType="com.cndinfo.cndlct.ssp.user.entity.UserMerchatPage">
+        <!--select m.name,i.name primary_enterprise_name,r.`role` ,r.audit_time, r.audit_status from ssp_user_merchant_relation r
+        left join ssp_merchant m on r.merchant_id =m.id
+        left join ssp_merchant_enterprise_authorization a on r.merchant_id =a.merchant_id
+        left join ssp_enterprise_information i on a.credit_code =i.credit_code-->
+        <!-- select m.id, m.avatar,m.name,i.name primary_enterprise_name,r.`role` ,r.audit_time, r.audit_status, r.enabled,(case when r.role='1' then 1 else 0 end)sort from ssp_user_merchant_relation r
+         left join ssp_merchant m on r.merchant_id =m.id
+         left join ssp_merchant_enterprise_authorization a on r.merchant_id =a.merchant_id
+         left join ssp_enterprise_information i on a.credit_code =i.credit_code-->
+        select m.id,m.code,m.avatar,m.name,i.name primary_enterprise_name,r.`role` ,r.create_time ,
+        r.enabled,a.authorized is_Authorize from
+        ssp_user_merchant_relation r
+        left join ssp_merchant m on r.merchant_id =m.id and m.data_status =0
+        left join ssp_merchant_enterprise_authorization a on r.merchant_id =a.merchant_id and a.data_status =0
+        left join ssp_enterprise_information i on a.credit_code =i.credit_code and i.data_status =0
+        <where>
+            <if test="userMerchantRelation.userId !=null and userMerchantRelation.userId !=''">
+                r.user_id =#{userMerchantRelation.userId} and a.`primary` ='y' and r.data_status =0
+            </if>
+            <!--<choose>
+                    <when test="userMerchantRelation.auditStatus !=null and userMerchantRelation.auditStatus !=''">
+                            and r.audit_status =#{userMerchantRelation.auditStatus}
+                    </when>
+                    <otherwise>
+                            and not r.audit_status =1
+                    </otherwise>
+            </choose>-->
+        </where>
+        order by audit_time desc
+    </select>
+
+    <update id="updateRoleById">
+        update ssp_user_merchant_relation set `role` =#{role} where id=#{id}
+    </update>
+
+    <update id="setEnable">
+        update ssp_user_merchant_relation set `enabled` =#{enabled} where id=#{userId}
+    </update>
+
+    <select id="getUserMerchantRelation" resultType="com.cndinfo.cndlct.ssp.user.entity.UserMerchantRelation">
+        select * from ssp_user_merchant_relation sumr where sumr.merchant_id =#{userMerchantRelation.merchantId} and
+        sumr.user_id=#{userMerchantRelation.userId}
+    </select>
+
+    <update id="disableOrEnable">
+        update ssp_user_merchant_relation r set r.`enabled` =#{changeUserMerchantRelation.enable} where r.id in
+        <foreach collection="changeUserMerchantRelation.ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </update>
+
+
+</mapper>
