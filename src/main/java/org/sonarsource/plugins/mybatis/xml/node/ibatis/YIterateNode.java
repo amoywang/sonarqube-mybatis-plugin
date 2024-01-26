@@ -6,7 +6,8 @@ import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 
 /* xml/node/ibatis/YIterateNode.class */
 public class YIterateNode extends BaseIbatisNode {
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.BaseIbatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    // org.sonarsource.plugins.mybatis.xml.node.base.BaseIbatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toString() {
         StringBuilder result = new StringBuilder();
         if (!this.removeFirstPrepend) {
@@ -27,7 +28,8 @@ public class YIterateNode extends BaseIbatisNode {
         return resultString;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.BaseIbatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    // org.sonarsource.plugins.mybatis.xml.node.base.BaseIbatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         if (!this.removeFirstPrepend) {

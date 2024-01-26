@@ -6,3 +6,5 @@ target/
 .classpath
 .DS_Store
 
+/src/test/resources/mapper/
+/src/test/log/

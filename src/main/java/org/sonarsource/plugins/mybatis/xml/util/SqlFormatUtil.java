@@ -131,20 +131,20 @@ public class SqlFormatUtil {
         boolean z = true;
         while (true) {
             boolean start = z;
-            if (sql.indexOf("#", 0) > 0) {
+            if (sql.indexOf("#") > 0) {
                 if (start) {
-                    sb.append(sql.substring(0, sql.indexOf("#")));
+                    sb.append(sql, 0, sql.indexOf("#"));
                     sql = sql.substring(sql.indexOf("#") + 1);
                     sb.append(" ${");
                     z = false;
                 } else {
-                    sb.append(sql.substring(0, sql.indexOf("#")));
+                    sb.append(sql, 0, sql.indexOf("#"));
                     sql = sql.substring(sql.indexOf("#") + 1);
                     sb.append("}");
                     z = true;
                 }
             } else {
-                sb.append(sql.substring(0));
+                sb.append(sql);
                 return sb.toString();
             }
         }

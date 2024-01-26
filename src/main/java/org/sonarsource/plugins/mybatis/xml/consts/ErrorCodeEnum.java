@@ -18,10 +18,10 @@ public enum ErrorCodeEnum {
     E888888("E888888", "违反规则"),
     E999991("E999991", "ibaits正在完善,暂不支持"),
     E999999("E999999", "xml必须为mybaits或ibatis");
-    
+
     private static final Logger log = LoggerFactory.getLogger(ErrorCodeEnum.class);
-    private String code;
-    private String desc;
+    private final String code;
+    private final String desc;
 
     ErrorCodeEnum(String code, String desc) {
         this.code = code;

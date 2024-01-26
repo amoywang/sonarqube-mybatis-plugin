@@ -2,6 +2,8 @@ package org.sonarsource.plugins.mybatis.wang.pojo;
 
 import org.sonarsource.plugins.mybatis.xml.pojo.XmlNodeParserResult;
 
+import java.util.Objects;
+
 public class XmlParseResult extends BaseResult {
     private String mapperFilePath;
     private String mapperName;
@@ -33,9 +35,11 @@ public class XmlParseResult extends BaseResult {
     public Integer getLineNumber() {
         return lineNumber;
     }
-    public void setLineNumber(Integer line){
+
+    public void setLineNumber(Integer line) {
         this.lineNumber = line;
     }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -58,7 +62,7 @@ public class XmlParseResult extends BaseResult {
                 if (getLineNumber() != other.getLineNumber()) {
                     return false;
                 }
-                return this$xmlNodeParserResult == null ? other$xmlNodeParserResult == null : this$xmlNodeParserResult.equals(other$xmlNodeParserResult);
+                return Objects.equals(this$xmlNodeParserResult, other$xmlNodeParserResult);
             }
             return false;
         }

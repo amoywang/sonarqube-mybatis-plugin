@@ -37,7 +37,11 @@
         update_user, data_status, tenant_id, version, create_user_name, update_user_name, create_org, company_id,
         department_id, account_org_id, staff_id, idx, avatar
     </sql>
-
+    <sql id="Base_Column_List">
+        id, read_protocol,user_id, nick_name, telephone, real_name, e_sign_id, create_time, create_user, update_time,
+        update_user, data_status, tenant_id, version, create_user_name, update_user_name, create_org, company_id,
+        department_id, account_org_id, staff_id, idx, avatar
+    </sql>
     <select id="getByUserId" resultType="com.cndinfo.cndlct.ssp.repository.impl.user.po.UserPO">
         select * from ssp_user where user_id =#{id}
     </select>
@@ -110,4 +114,10 @@
     <select id="getById" resultType="com.cndinfo.cndlct.ssp.repository.impl.user.po.UserPO">
         select id from ssp_user where id =${id}
     </select>
+    <delete id="getByIdEX12" resultType="com.cndinfo.cndlct.ssp.repository.impl.user.po.UserPO">
+        delete  from ssp_user
+    </delete>
+    <delete id="getByIdEX" resultType="com.cndinfo.cndlct.ssp.repository.impl.user.po.UserPO">
+        delete  from ssp_user where id =${id}
+    </delete>
 </mapper>

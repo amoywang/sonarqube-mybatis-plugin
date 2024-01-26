@@ -1,5 +1,4 @@
-package org.sonarsource.plugins.mybatis.wang.pojo.ideaPlugin;
-
+package org.sonarsource.plugins.mybatis.wang.pojo.regular;
 
 
 import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
@@ -7,6 +6,7 @@ import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class XmlPluginRuleResultAll {
     private Map<RuleCodeEnum, List<XmlPluginRuleResult>> ruleMap = new HashMap();
@@ -24,7 +24,7 @@ public class XmlPluginRuleResultAll {
             if (other.canEqual(this)) {
                 Object this$ruleMap = getRuleMap();
                 Object other$ruleMap = other.getRuleMap();
-                return this$ruleMap == null ? other$ruleMap == null : this$ruleMap.equals(other$ruleMap);
+                return Objects.equals(this$ruleMap, other$ruleMap);
             }
             return false;
         }
@@ -37,7 +37,7 @@ public class XmlPluginRuleResultAll {
 
     public int hashCode() {
         Object $ruleMap = getRuleMap();
-        int result = (1 * 59) + ($ruleMap == null ? 43 : $ruleMap.hashCode());
+        int result = (59) + ($ruleMap == null ? 43 : $ruleMap.hashCode());
         return result;
     }
 

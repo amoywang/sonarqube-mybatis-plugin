@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 
 public enum StringUtil {
     ;
-    
-    private static Pattern P1 = Pattern.compile(" {2,}");
-    private static Pattern P2 = Pattern.compile("\\t{2,}");
+
+    private static final Pattern P1 = Pattern.compile(" {2,}");
+    private static final Pattern P2 = Pattern.compile("\\t{2,}");
 
     public static String delLineBreak(String sql) {
         return sql.trim().replace("\n", Constant.SPACE_CHAR).replace("\t", Constant.SPACE_CHAR).replace("\r", Constant.SPACE_CHAR).replace("\f", Constant.SPACE_CHAR);

@@ -10,7 +10,7 @@ public class ErrorDataFromLinter implements Serializable {
     private int line = 0;
 
     public ErrorDataFromLinter(final String externalRuleId, final String issueMessage, final String filePath,
-            final int line) {
+                               final int line) {
         this.externalRuleId = externalRuleId;
         this.issueMessage = issueMessage;
         this.filePath = filePath;
@@ -35,16 +35,15 @@ public class ErrorDataFromLinter implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append(externalRuleId);
-        s.append("|");
-        s.append(issueMessage);
-        s.append("|");
-        s.append(filePath);
-        s.append("(");
-        s.append(line);
-        s.append(")");
-        return s.toString();
+        String s = externalRuleId +
+                "|" +
+                issueMessage +
+                "|" +
+                filePath +
+                "(" +
+                line +
+                ")";
+        return s;
     }
 
 }

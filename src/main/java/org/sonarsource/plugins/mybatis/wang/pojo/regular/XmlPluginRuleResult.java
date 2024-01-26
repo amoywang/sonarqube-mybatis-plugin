@@ -1,6 +1,9 @@
-package org.sonarsource.plugins.mybatis.wang.pojo.ideaPlugin;
+package org.sonarsource.plugins.mybatis.wang.pojo.regular;
 
 import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
+import org.sonarsource.plugins.mybatis.wang.util.IOUtils;
+
+import java.util.Objects;
 
 public class XmlPluginRuleResult {
     private String mapperName;
@@ -13,8 +16,16 @@ public class XmlPluginRuleResult {
     private RuleCodeEnum ruleCodeEnum;
     private String dbType;
     private String filePath;
+    private Integer lineNumber;
 
-    /* loaded from: sql_scanner-3.2.3-SNAPSHOT.jar:com/zhang/zmain/pojo/ideaPlugin/XmlPluginRuleResult$XmlPluginRuleResultBuilder.class */
+    public void setLineNumber(Integer line) {
+        this.lineNumber = line;
+    }
+
+    public Integer getLineNumber() {
+        return this.lineNumber;
+    }
+
     public static class XmlPluginRuleResultBuilder {
         private String mapperName;
         private String sqlNodeId;
@@ -26,6 +37,15 @@ public class XmlPluginRuleResult {
         private RuleCodeEnum ruleCodeEnum;
         private String dbType;
         private String filePath;
+        private Integer lineNumber;
+
+        public void setLineNumber(Integer line) {
+            this.lineNumber = line;
+        }
+
+        public Integer getLineNumber() {
+            return this.lineNumber;
+        }
 
         XmlPluginRuleResultBuilder() {
         }
@@ -80,12 +100,23 @@ public class XmlPluginRuleResult {
             return this;
         }
 
+        public XmlPluginRuleResultBuilder lineNumber(String filePath) {
+            this.lineNumber = IOUtils.getLineNumber(filePath, this.sqlNodeId);
+            return this;
+        }
+
         public XmlPluginRuleResult build() {
-            return new XmlPluginRuleResult(this.mapperName, this.sqlNodeId, this.sqlNodeIdOrg, this.sqlText, this.nodeOptType, this.druidFormatSql, this.parseResult, this.ruleCodeEnum, this.dbType, this.filePath);
+            return new XmlPluginRuleResult(this.mapperName, this.sqlNodeId, this.sqlNodeIdOrg,
+                    this.sqlText, this.nodeOptType, this.druidFormatSql, this.parseResult,
+                    this.ruleCodeEnum, this.dbType, this.filePath, this.lineNumber);
         }
 
         public String toString() {
-            return "XmlPluginRuleResult.XmlPluginRuleResultBuilder(mapperName=" + this.mapperName + ", sqlNodeId=" + this.sqlNodeId + ", sqlNodeIdOrg=" + this.sqlNodeIdOrg + ", sqlText=" + this.sqlText + ", nodeOptType=" + this.nodeOptType + ", druidFormatSql=" + this.druidFormatSql + ", parseResult=" + this.parseResult + ", ruleCodeEnum=" + this.ruleCodeEnum + ", dbType=" + this.dbType + ", filePath=" + this.filePath + ")";
+            return "XmlPluginRuleResult.XmlPluginRuleResultBuilder(mapperName=" + this.mapperName + ", sqlNodeId=" + this.sqlNodeId
+                    + ", sqlNodeIdOrg=" + this.sqlNodeIdOrg + ", sqlText=" + this.sqlText
+                    + ", nodeOptType=" + this.nodeOptType + ", druidFormatSql=" + this.druidFormatSql
+                    + ", parseResult=" + this.parseResult + ", ruleCodeEnum=" + this.ruleCodeEnum
+                    + ", dbType=" + this.dbType + ", filePath=" + this.filePath + ")";
         }
     }
 
@@ -219,7 +250,7 @@ public class XmlPluginRuleResult {
                 }
                 Object this$filePath = getFilePath();
                 Object other$filePath = other.getFilePath();
-                return this$filePath == null ? other$filePath == null : this$filePath.equals(other$filePath);
+                return Objects.equals(this$filePath, other$filePath);
             }
             return false;
         }
@@ -232,7 +263,7 @@ public class XmlPluginRuleResult {
 
     public int hashCode() {
         Object $mapperName = getMapperName();
-        int result = (1 * 59) + ($mapperName == null ? 43 : $mapperName.hashCode());
+        int result = (59) + ($mapperName == null ? 43 : $mapperName.hashCode());
         Object $sqlNodeId = getSqlNodeId();
         int result2 = (result * 59) + ($sqlNodeId == null ? 43 : $sqlNodeId.hashCode());
         Object $sqlNodeIdOrg = getSqlNodeIdOrg();
@@ -254,10 +285,15 @@ public class XmlPluginRuleResult {
     }
 
     public String toString() {
-        return "XmlPluginRuleResult(mapperName=" + getMapperName() + ", sqlNodeId=" + getSqlNodeId() + ", sqlNodeIdOrg=" + getSqlNodeIdOrg() + ", sqlText=" + getSqlText() + ", nodeOptType=" + getNodeOptType() + ", druidFormatSql=" + getDruidFormatSql() + ", parseResult=" + getParseResult() + ", ruleCodeEnum=" + getRuleCodeEnum() + ", dbType=" + getDbType() + ", filePath=" + getFilePath() + ")";
+        return "XmlPluginRuleResult(mapperName=" + getMapperName() + ", sqlNodeId=" + getSqlNodeId()
+                + ", sqlNodeIdOrg=" + getSqlNodeIdOrg() + ", sqlText=" + getSqlText() + ", nodeOptType="
+                + getNodeOptType() + ", druidFormatSql=" + getDruidFormatSql() + ", parseResult=" + getParseResult()
+                + ", ruleCodeEnum=" + getRuleCodeEnum() + ", dbType=" + getDbType() + ", filePath=" + getFilePath() + ")";
     }
 
-    XmlPluginRuleResult(String mapperName, String sqlNodeId, String sqlNodeIdOrg, String sqlText, String nodeOptType, String druidFormatSql, String parseResult, RuleCodeEnum ruleCodeEnum, String dbType, String filePath) {
+    XmlPluginRuleResult(String mapperName, String sqlNodeId, String sqlNodeIdOrg, String sqlText,
+                        String nodeOptType, String druidFormatSql, String parseResult,
+                        RuleCodeEnum ruleCodeEnum, String dbType, String filePath, Integer lineNumber) {
         this.mapperName = mapperName;
         this.sqlNodeId = sqlNodeId;
         this.sqlNodeIdOrg = sqlNodeIdOrg;
@@ -268,6 +304,7 @@ public class XmlPluginRuleResult {
         this.ruleCodeEnum = ruleCodeEnum;
         this.dbType = dbType;
         this.filePath = filePath;
+        this.lineNumber = lineNumber;
     }
 
     public static XmlPluginRuleResultBuilder builder() {

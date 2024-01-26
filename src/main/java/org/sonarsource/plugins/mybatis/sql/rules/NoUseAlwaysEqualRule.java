@@ -5,7 +5,7 @@ import com.alibaba.druid.sql.ast.expr.SQLBinaryOpExpr;
 import org.sonar.api.rule.Severity;
 import org.sonarsource.plugins.mybatis.sql.AbstractRule;
 
-import static org.sonarsource.plugins.mybatis.Constant.MYBATIS_MATTER_CHECK_RULE_PREFIX;
+import static org.sonarsource.plugins.mybatis.sql.Constant.MYBATIS_MATTER_CHECK_RULE_PREFIX;
 
 public class NoUseAlwaysEqualRule extends AbstractRule {
     @Override
@@ -17,9 +17,10 @@ public class NoUseAlwaysEqualRule extends AbstractRule {
         }
         return super.visit(x);
     }
+
     @Override
     public String getRuleID() {
-        return MYBATIS_MATTER_CHECK_RULE_PREFIX+this.getClass().getSimpleName();
+        return MYBATIS_MATTER_CHECK_RULE_PREFIX + this.getClass().getSimpleName();
     }
 
     @Override
@@ -29,15 +30,16 @@ public class NoUseAlwaysEqualRule extends AbstractRule {
 
     @Override
     public String getName() {
-        return "MyBatis XML SQL Check"+this.getClass().getSimpleName();
+        return "禁止在条件子句中使用恒等式";
     }
 
     @Override
     public String getDescription() {
-        return "不要再where条件子句中使用恒等式条件，(eg. select 1 from dual where 2=2)";
+        return "不要在where条件子句中使用恒等式条件，(eg. select 1 from dual where 2=2).若后续查询条件都为空，则会造成全表查询。";
     }
+
     @Override
-    public String getSimpleDescription(){
-        return "Statement should not include always equal in condition";
+    public String getSimpleDescription() {
+        return "禁止在条件子句中使用恒等式";
     }
 }

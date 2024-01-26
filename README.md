@@ -45,7 +45,13 @@ If you want to skip mybatis sensor sometimes, you can change the global properti
 
 ## How to Add New Rule
 
+### SQL Expr Check
 
 - add new rule class extend AbstractRule under folder [src/main/java/org/sonarsource/plugins/mybatis/sql/rules]
 - specify the rule in the rule Class
 - add the rule full name in file [src/main/resources/META-INF/services/org.sonarsource.plugins.mybatis.sql.AbstractRule] to regist the rule
+
+### Regular Check
+
+- define the rule in file [org/sonarsource/plugins/mybatis/wang/enums/RuleCodeEnum.java]
+- do the rule check in file [org/sonarsource/plugins/mybatis/wang/parser/RegularRuleHandler.java#doRuleAll()]

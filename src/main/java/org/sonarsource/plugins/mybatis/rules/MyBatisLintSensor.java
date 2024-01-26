@@ -13,15 +13,20 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.xml.Xml;
 import org.sonarsource.plugins.mybatis.sql.RuleCheckResult;
+import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
+import org.sonarsource.plugins.mybatis.wang.parser.RegularRuleHandler;
 import org.sonarsource.plugins.mybatis.wang.parser.XmlBatisSqlParser;
 import org.sonarsource.plugins.mybatis.wang.pojo.XmlParseResult;
+import org.sonarsource.plugins.mybatis.wang.pojo.regular.XmlPluginRuleResult;
+import org.sonarsource.plugins.mybatis.wang.pojo.regular.XmlPluginRuleResultAll;
+import org.sonarsource.plugins.mybatis.xml.pojo.XmlNodeParserResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.sonarsource.plugins.mybatis.MyBatisPlugin.SONAR_MYBATIS_SKIP;
-
 
 
 /**
@@ -42,7 +47,7 @@ public class MyBatisLintSensor implements Sensor {
     protected final Configuration config;
     protected final FileSystem fileSystem;
     protected SensorContext context;
-    private List<String> stmtIdExcludeList = new ArrayList<>();
+    private final List<String> stmtIdExcludeList = new ArrayList<>();
 
     /**
      * Use of IoC to get Settings, FileSystem, RuleFinder and ResourcePerspectives
@@ -67,7 +72,7 @@ public class MyBatisLintSensor implements Sensor {
             sonarMyBatisSkipBooleanValue = sonarMyBatisSkipValue.get();
         }
         if (Boolean.TRUE.equals(sonarMyBatisSkipBooleanValue)) {
-            LOGGER.info("MyBatis sensor is skiped.");
+            LOGGER.info("MyBatis sensor is skipped.");
             return;
         }
         // analysis mybatis mapper files and generate issues
@@ -82,16 +87,36 @@ public class MyBatisLintSensor implements Sensor {
         XmlBatisSqlParser xmlBatisSqlParser = new XmlBatisSqlParser();
         List<XmlParseResult> results = xmlBatisSqlParser.parseXml(mapperFiles, null, "mysql");
         List<ErrorDataFromLinter> mybatisError = new ArrayList<>();
+        // SQL 表达式检测结果
         for (XmlParseResult temp : results) {
-            for (RuleCheckResult r : temp.getXmlNodeParserResult().getRuleCheckResults()) {
-                ErrorDataFromLinter errorData = new ErrorDataFromLinter(r.getRuleId(), r.getObj(), temp.getMapperFilePath(), temp.getLineNumber());
-                mybatisError.add(errorData);
+            XmlNodeParserResult xmlNodeParserResult = temp.getXmlNodeParserResult();
+            if (xmlNodeParserResult != null) {
+                List<RuleCheckResult> resultList = xmlNodeParserResult.getRuleCheckResults();
+                for (RuleCheckResult r : resultList) {
+                    ErrorDataFromLinter errorData = new ErrorDataFromLinter(r.getRuleId(), r.getObj(),
+                            temp.getMapperFilePath(), temp.getLineNumber());
+                    mybatisError.add(errorData);
+                }
             }
         }
+
+        // SQL正则表达式检测
+        XmlPluginRuleResultAll all = RegularRuleHandler.doRuleAll(results);
+        Map<RuleCodeEnum, List<XmlPluginRuleResult>> map = all.getRuleMap();
+        if (map != null && map.size() > 0) {
+            for (Map.Entry<RuleCodeEnum, List<XmlPluginRuleResult>> entry : map.entrySet()) {
+                RuleCodeEnum ruleInfo = entry.getKey();
+                for (XmlPluginRuleResult result : entry.getValue()) {
+                    ErrorDataFromLinter errorData = new ErrorDataFromLinter(ruleInfo.getName(), result.getParseResult(),
+                            result.getFilePath(), result.getLineNumber());
+                    mybatisError.add(errorData);
+                }
+            }
+        }
+        // 保存检测结果
         for (ErrorDataFromLinter err : mybatisError) {
             getResourceAndSaveIssue(err);
         }
-
     }
 
     private void getResourceAndSaveIssue(final ErrorDataFromLinter error) {

@@ -144,7 +144,7 @@ public class XmlNode implements IXmlNodes {
 
     public int hashCode() {
         Object $sqlNodeId = getSqlNodeId();
-        int result = (1 * 59) + ($sqlNodeId == null ? 43 : $sqlNodeId.hashCode());
+        int result = (59) + ($sqlNodeId == null ? 43 : $sqlNodeId.hashCode());
         Object $sqlNodeIdOrg = getSqlNodeIdOrg();
         int result2 = (result * 59) + ($sqlNodeIdOrg == null ? 43 : $sqlNodeIdOrg.hashCode());
         Object $nameSpace = getNameSpace();

@@ -13,6 +13,7 @@ import com.alibaba.druid.sql.parser.ParserException;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
 import com.alibaba.druid.sql.parser.Token;
 import com.alibaba.druid.sql.visitor.SchemaStatVisitor;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.plugins.mybatis.xml.exception.DruidParseException;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public enum DruidVisitorUtil {
     ;
-    
+
     private static final Logger log = LoggerFactory.getLogger(DruidVisitorUtil.class);
 
     public static SchemaStatVisitor getVisitor(String sql, String dbType) throws DruidParseException {
@@ -42,6 +43,9 @@ public enum DruidVisitorUtil {
     }
 
     public static SchemaStatVisitor getSqlParserVisitor(String sql, String dbType) throws Exception {
+        if (StringUtils.isEmpty(sql)) {
+            return null;
+        }
         SQLStatementParser dB2StatementParser;
         SchemaStatVisitor dB2SchemaStatVisitor;
         if ("oracle".equalsIgnoreCase(dbType)) {
@@ -79,7 +83,10 @@ public enum DruidVisitorUtil {
     }
 
     public static SchemaStatVisitor getSqlParserVisitorSingle(String sql, String dbType) throws DruidParseException {
-        StringBuilder errorStr = new StringBuilder("");
+        if (StringUtils.isEmpty(sql)) {
+            return null;
+        }
+        StringBuilder errorStr = new StringBuilder();
         errorStr.append("SQL statement:").append(sql).append("\n");
         try {
             SchemaStatVisitor visitor = getSqlParserVisitor(sql, dbType);
@@ -96,7 +103,7 @@ public enum DruidVisitorUtil {
         SchemaStatVisitor visitor3;
         SchemaStatVisitor visitor4;
         SchemaStatVisitor visitor5;
-        StringBuilder errorStr = new StringBuilder("");
+        StringBuilder errorStr = new StringBuilder();
         errorStr.append("SQL statement:").append(sql).append("\n");
         try {
             visitor = getSqlParserVisitor(sql, "mysql");

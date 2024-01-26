@@ -7,7 +7,7 @@ public class DruidParseException extends BaseException {
     private static final long serialVersionUID = -4762181054514075992L;
     private String msg;
     private Integer code;
-    private Exception ex;
+    private final Exception ex;
 
     public DruidParseException(Exception ex) {
         this.ex = ex;

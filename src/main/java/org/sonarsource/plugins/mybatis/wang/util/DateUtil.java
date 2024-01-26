@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public enum DateUtil {
     ;
-    
+
     private static final DateTimeFormatter ymd = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final DateTimeFormatter ymdHms = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     private static final DateTimeFormatter ymdHmsSSS = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");

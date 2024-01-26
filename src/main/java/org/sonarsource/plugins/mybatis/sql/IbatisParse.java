@@ -30,16 +30,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 public class IbatisParse {
     private static final Logger log = LoggerFactory.getLogger(IbatisParse.class);
     private String nodeAsXml;
-    private XmlNode xmlNode;
+    private final XmlNode xmlNode;
     private String dbType;
-    private Map<String, Element> xmlIncludeNodeMap;
+    private final Map<String, Element> xmlIncludeNodeMap;
     private boolean containIfTest;
     private boolean isDynamicSql = false;
     private boolean isIncludeSql = false;
-    private Map<String, String> propertyCacheMap = new HashMap();
+    private final Map<String, String> propertyCacheMap = new HashMap();
 
     public IbatisParse(XmlNode xmlNode, Map<String, Element> xmlIncludeNodeMap, String xmlFilePath, String dbType) {
         this.dbType = null;

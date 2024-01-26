@@ -13,12 +13,10 @@ import org.dom4j.tree.DefaultElement;
 import org.dom4j.tree.DefaultText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonarsource.plugins.mybatis.sql.rules.MybatisXmlSQLValidRule;
 import org.sonarsource.plugins.mybatis.wang.util.StringUtil;
 import org.sonarsource.plugins.mybatis.xml.consts.Constant;
 import org.sonarsource.plugins.mybatis.xml.consts.ErrorCodeEnum;
 import org.sonarsource.plugins.mybatis.xml.exception.DruidParseException;
-import org.sonarsource.plugins.mybatis.xml.exception.OtherException;
 import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 import org.sonarsource.plugins.mybatis.xml.node.commom.CdataNode;
 import org.sonarsource.plugins.mybatis.xml.node.commom.TextNode;
@@ -34,12 +32,12 @@ import java.util.*;
 /* sql/MybatisParse.class */
 public class MybatisParse {
     private static final Logger log = LoggerFactory.getLogger(MybatisParse.class);
-    private String sqlNodeId;
-    private List<XmlNode> xmlNodeList;
+    private final String sqlNodeId;
+    private final List<XmlNode> xmlNodeList;
     private String nodeAsXml;
     private boolean existSubSqlTagIdDuplicated;
     private String dbType;
-    private Map<String, List<Element>> xmlSqlTagGlobalMap;
+    private final Map<String, List<Element>> xmlSqlTagGlobalMap;
     private boolean containIfTest;
     private boolean existSubSqlTagId = true;
     private boolean isDynamicSql = false;
@@ -67,6 +65,7 @@ public class MybatisParse {
         xmlNodeParserResult.setNodeOptType(xmlNode.getNodeOptType());
         xmlNodeParserResult.setXmlType(xmlNode.getMapperType());
         xmlNodeParserResult.setXmlFilePath(xmlNode.getXmlFilePath());
+        xmlNodeParserResult.setRuleCheckResults(new ArrayList<>());
         if (xmlNode.isHasDuplicatedSqlTagId()) {
             xmlNodeParserResult.setHasDuplicatedSqlTagId(true);
             xmlNodeParserResult.setFormatSql("重复<sql id>:" + xmlNode.getSqlNodeIdOrg());
@@ -117,13 +116,12 @@ public class MybatisParse {
                         sqlCombine.append(printSql);
                     }
                     String formatSql = StringUtil.delLineBreak(SqlFormatUtil.mybatisFormat(sqlCombine.toString()));
-
-                    // todo 对解析后的SQL进行详细的规则判断
-                    //RESULT
+                    // SQL 正则表达式检测
                     List<RuleCheckResult> results = new ArrayList<>();
                     List<SQLStatement> stmtList = SQLUtils.parseStatements(formatSql, this.dbType);
                     //USE JAVA SPI TO GET RULE DEFINE IN META-INF/services
                     ServiceLoader<AbstractRule> rules = ServiceLoader.load(AbstractRule.class, AbstractRule.class.getClassLoader());
+                    // SQL 表达式检测
                     for (SQLStatement statement : stmtList) {
                         //DO CHECK
                         for (AbstractRule rule : rules) {
@@ -131,14 +129,10 @@ public class MybatisParse {
                             statement.accept(rule);
                         }
                     }
-                    if (!results.isEmpty()) {
-                        String errorMessage = StringUtils.join(results, ",");
-                        xmlNodeParserResult.setFormatSql(formatSql);
-                        xmlNodeParserResult.setStatusCode(ErrorCodeEnum.E888888.getCode());
-                        xmlNodeParserResult.setErrorMsg(errorMessage);
-                        xmlNodeParserResult.setRuleCheckResults(results);
-                    }
-
+                    xmlNodeParserResult.setFormatSql(formatSql);
+                    xmlNodeParserResult.setStatusCode(ErrorCodeEnum.SUCCESS.getCode());
+                    xmlNodeParserResult.setErrorMsg("");
+                    xmlNodeParserResult.setRuleCheckResults(results);
                 }
             } catch (DruidParseException ex) {
                 xmlNodeParserResult.setFormatSql(null);
@@ -147,18 +141,11 @@ public class MybatisParse {
                 xmlNodeParserResult.setException(ex);
             } catch (Exception ex2) {
                 String errorMsg = "Parse SQL :[" + xmlNodeParserResult.getXmlFilePath() + "],Sql Ref Id=" + xmlNodeParserResult.getSqlNodeId() + "error: " + ex2.getMessage();
-                log.error(errorMsg, ex2);
+                log.error(errorMsg);
                 xmlNodeParserResult.setStatusCode(ErrorCodeEnum.E500001.getCode());
-                xmlNodeParserResult.setErrorMsg(ErrorCodeEnum.E500001.getDesc() + ":" + ex2.getMessage());
-                xmlNodeParserResult.setException(new OtherException());
-                List<RuleCheckResult> results = new ArrayList<>();
-                RuleCheckResult result = new RuleCheckResult();
-                MybatisXmlSQLValidRule t = new MybatisXmlSQLValidRule();
-                result.setObj(null);
-                result.setRuleId(t.getRuleID());
-                result.setMessage(errorMsg);
-                results.add(result);
-                xmlNodeParserResult.setRuleCheckResults(results);
+                xmlNodeParserResult.setErrorMsg(ex2.getMessage());
+                xmlNodeParserResult.setException(new DruidParseException(ex2));
+                xmlNodeParserResult.setFormatSql(null);
             }
         }
     }
@@ -182,7 +169,7 @@ public class MybatisParse {
                 }
             } else if (defaultText instanceof DefaultCDATA) {
                 nodeImpl = new CdataNode();
-                String cdataText = ((DefaultCDATA) defaultText).getText().trim();
+                String cdataText = defaultText.getText().trim();
                 ((CdataNode) nodeImpl).setStringValue(Constant.SPACE_CHAR + cdataText + Constant.SPACE_CHAR);
             } else if (!(defaultText instanceof DefaultComment)) {
                 if (defaultText instanceof DefaultElement) {

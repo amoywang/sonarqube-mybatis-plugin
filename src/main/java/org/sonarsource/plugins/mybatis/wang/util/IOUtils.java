@@ -1,4 +1,4 @@
-package org.sonarsource.plugins.mybatis.utils;
+package org.sonarsource.plugins.mybatis.wang.util;
 
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -19,16 +19,15 @@ public class IOUtils {
 
     /**
      * Search file, get the line number which matches the keyword firstly
-     * 
+     *
      * @param filePath
      * @param stmtId
      * @return
      */
     public static int getLineNumber(final String filePath, final String stmtId) {
-        int lineNumber = 1;// numero mayor a cero en caso que "no se llame"
-//        final String sqlCmdTypeAux = "<" + sqlCmdType;
+        int lineNumber = 1;
         final String stmtIdAuxDoublequote = stmtId + "\"";
-        final String stmtIdAuxSimplequote = stmtId + "\'";
+        final String stmtIdAuxSimplequote = stmtId + "'";
         LOGGER.debug("filePath: " + filePath + " stmtId: ");
         try (LineNumberReader lineNumberReader = new LineNumberReader(
                 new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {

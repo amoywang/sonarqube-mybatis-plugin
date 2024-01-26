@@ -17,7 +17,7 @@ public abstract class AbstractRule extends SQLASTVisitorAdapter {
     protected final boolean addCheckResult(SQLObject object) {
         RuleCheckResult result = new RuleCheckResult();
         result.setRuleId(getRuleID());
-        result.setObj(getSimpleDescription() + ",invalid sqlObject:[" + object.toString()+"]");
+        result.setObj(getSimpleDescription() + ",invalid sqlObject:[" + object.toString() + "]");
         result.setRuleId(getRuleID());
         return results.add(result);
     }

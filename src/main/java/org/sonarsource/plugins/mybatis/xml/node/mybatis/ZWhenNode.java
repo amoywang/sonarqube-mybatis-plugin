@@ -16,7 +16,8 @@ public class ZWhenNode extends BaseMybatisNode {
         return result.toString();
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         if (!this.propertyConfilct) {
@@ -27,7 +28,8 @@ public class ZWhenNode extends BaseMybatisNode {
         return result.toString();
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public void setConfilct(String type) {
         if (type.equalsIgnoreCase(Constant.OTHERWISE)) {
             this.propertyConfilct = true;

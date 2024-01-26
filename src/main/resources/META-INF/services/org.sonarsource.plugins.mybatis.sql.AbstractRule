@@ -5,4 +5,3 @@ org.sonarsource.plugins.mybatis.sql.rules.NoUseDollarLikeRule
 org.sonarsource.plugins.mybatis.sql.rules.NoUseDollarOrderByRule
 org.sonarsource.plugins.mybatis.sql.rules.NoUseDollarInListRule
 org.sonarsource.plugins.mybatis.sql.rules.NoUseDollarRuleEx
-org.sonarsource.plugins.mybatis.sql.rules.MybatisXmlSQLValidRule

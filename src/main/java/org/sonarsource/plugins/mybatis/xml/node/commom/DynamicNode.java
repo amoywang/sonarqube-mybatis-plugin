@@ -24,7 +24,8 @@ public class DynamicNode extends BaseCommonNode {
         return result.toString();
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.BaseCommonNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    // org.sonarsource.plugins.mybatis.xml.node.base.BaseCommonNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         result.append(Constant.SPACE_CHAR).append(this.prepend).append(Constant.SPACE_CHAR);

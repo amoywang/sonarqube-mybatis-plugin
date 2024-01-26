@@ -1,10 +1,12 @@
 package org.sonarsource.plugins.mybatis.wang.util;
 
+import com.alibaba.druid.sql.parser.ParserException;
 import com.alibaba.druid.sql.visitor.SchemaStatVisitor;
 import com.alibaba.druid.stat.TableStat;
+import org.apache.commons.lang.StringUtils;
 import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
 import org.sonarsource.plugins.mybatis.wang.pojo.XmlParseResult;
-import org.sonarsource.plugins.mybatis.wang.pojo.ideaPlugin.XmlPluginRuleResult;
+import org.sonarsource.plugins.mybatis.wang.pojo.regular.XmlPluginRuleResult;
 import org.sonarsource.plugins.mybatis.xml.consts.Constant;
 import org.sonarsource.plugins.mybatis.xml.consts.ErrorCodeEnum;
 import org.sonarsource.plugins.mybatis.xml.exception.DruidParseException;
@@ -17,14 +19,17 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum RuleUtil {
-    ;
+public class RuleUtil {
 
     public static XmlPluginRuleResult doRuleUpdateNoWait(XmlParseResult xmlParseResult, RuleCodeEnum ruleCodeEnum) {
         if (!ruleCodeEnum.isActive()) {
             return null;
         }
+
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         Matcher matcher = Pattern.compile("\\s*for\\s*update\\s*([a-zA-Z]*)").matcher(sql);
         if (matcher.find()) {
@@ -107,7 +112,11 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
+
         Matcher matcher = Pattern.compile("\\$\\{([a-zA-Z0-9]*)}").matcher(sql);
         if (matcher.find()) {
             return createXmlPluginRuleResult(xmlParseResult, ruleCodeEnum, "禁止使用${}");
@@ -120,6 +129,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         String nodeOptType = xmlNodeParserResult.getNodeOptType();
         boolean isSuccess = ErrorCodeEnum.SUCCESS.getCode().equalsIgnoreCase(xmlNodeParserResult.getStatusCode());
@@ -138,6 +150,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         SchemaStatVisitor visitor = xmlNodeParserResult.getVisitor();
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         String nodeOptType = xmlNodeParserResult.getNodeOptType();
@@ -175,7 +190,13 @@ public enum RuleUtil {
         if (!ruleCodeEnum.isActive()) {
             return null;
         }
+        if (xmlParseResult.getXmlNodeParserResult().isHasDuplicated()){
+            return null;
+        }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         String nodeOptType = xmlNodeParserResult.getNodeOptType();
         boolean isSelect = "select".equalsIgnoreCase(nodeOptType);
@@ -192,6 +213,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         boolean isJoinConditon = sql.contains("join");
         boolean isOn = sql.contains("on");
@@ -206,6 +230,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         boolean isUseTrigger = sql.contains("trigger");
         if (isUseTrigger) {
@@ -219,6 +246,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         SchemaStatVisitor visitor = xmlNodeParserResult.getVisitor();
         String nodeOptType = xmlNodeParserResult.getNodeOptType();
         if ("insert".equalsIgnoreCase(nodeOptType) && null != visitor) {
@@ -236,6 +266,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String optType = xmlNodeParserResult.getNodeOptType();
         if (!"select".equalsIgnoreCase(optType) && xmlNodeParserResult.isContainIfTest()) {
             return createXmlPluginRuleResult(xmlParseResult, ruleCodeEnum, "增删改含有if-test动态标签,建议去掉if-test,一个业务操作对应一条SQL,不要写一个大而全的更新接口.避免更新无改动的字段");
@@ -248,6 +281,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         SchemaStatVisitor visitor = xmlNodeParserResult.getVisitor();
         if (null != visitor && null != visitor.getTables()) {
             Map<TableStat.Name, TableStat> tableStatMap = visitor.getTables();
@@ -265,6 +301,9 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
         Matcher matcher1 = Pattern.compile("=\\s*null").matcher(sql);
         Matcher matcher2 = Pattern.compile("null\\s*=").matcher(sql);
@@ -283,10 +322,13 @@ public enum RuleUtil {
             return null;
         }
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+        if (StringUtils.isEmpty(xmlNodeParserResult.getFormatSql())){
+            return null;
+        }
         String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
-        BaseException exception = xmlNodeParserResult.getException();
-        if (exception instanceof DruidParseException) {
-            DruidParseException druidParseException = (DruidParseException) exception;
+        Exception exception = xmlNodeParserResult.getException();
+        if (exception instanceof ParserException) {
+            ParserException druidParseException = (ParserException) exception;
             if (sql.contains("$")) {
                 parseResultOrSuggestion = "不支持解析$符号,存在SQL注入可能性,建议用#.";
             } else if (sql.contains("--")) {
@@ -298,9 +340,34 @@ public enum RuleUtil {
         }
         return null;
     }
-
+    public static XmlPluginRuleResult getParseError(XmlParseResult xmlParseResult, RuleCodeEnum ruleCodeEnum) {
+        String parseResultOrSuggestion;
+        if (!ruleCodeEnum.isActive()) {
+            return null;
+        }
+        XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
+//        String sql = xmlNodeParserResult.getFormatSql().toLowerCase();
+        Exception exception = xmlNodeParserResult.getException();
+        if (exception !=null) {
+            parseResultOrSuggestion = "SQL解析失败，请确认SQL是否拼写正确,详细错误:"+xmlNodeParserResult.getErrorMsg();
+            return createXmlPluginRuleResult(xmlParseResult, ruleCodeEnum, parseResultOrSuggestion);
+        }
+        return null;
+    }
     public static XmlPluginRuleResult createXmlPluginRuleResult(XmlParseResult xmlParseResult, RuleCodeEnum ruleCodeEnum, String parseResultOrSuggestion) {
         XmlNodeParserResult xmlNodeParserResult = xmlParseResult.getXmlNodeParserResult();
-        return XmlPluginRuleResult.builder().mapperName(xmlParseResult.getMapperName()).sqlNodeId(xmlNodeParserResult.getSqlNodeId()).sqlNodeIdOrg(xmlNodeParserResult.getSqlNodeIdOrg()).sqlText(xmlNodeParserResult.getFormatSql()).nodeOptType(xmlNodeParserResult.getNodeOptType()).druidFormatSql(xmlNodeParserResult.getDruidFormatSql()).parseResult(parseResultOrSuggestion).ruleCodeEnum(ruleCodeEnum).dbType(xmlNodeParserResult.getDbType()).filePath(xmlNodeParserResult.getXmlFilePath()).build();
+        return XmlPluginRuleResult.builder()
+                .mapperName(xmlParseResult.getMapperName())
+                .sqlNodeId(xmlNodeParserResult.getSqlNodeId()).
+                sqlNodeIdOrg(xmlNodeParserResult.getSqlNodeIdOrg())
+                .sqlText(xmlNodeParserResult.getFormatSql())
+                .nodeOptType(xmlNodeParserResult.getNodeOptType())
+                .druidFormatSql(xmlNodeParserResult.getDruidFormatSql())
+                .parseResult(parseResultOrSuggestion)
+                .ruleCodeEnum(ruleCodeEnum)
+                .dbType(xmlNodeParserResult.getDbType())
+                .filePath(xmlNodeParserResult.getXmlFilePath())
+                .lineNumber(xmlNodeParserResult.getXmlFilePath())
+                .build();
     }
 }

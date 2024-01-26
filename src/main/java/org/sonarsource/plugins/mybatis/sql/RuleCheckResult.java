@@ -1,7 +1,5 @@
 package org.sonarsource.plugins.mybatis.sql;
 
-import com.alibaba.druid.sql.ast.SQLObject;
-
 public class RuleCheckResult {
 
 

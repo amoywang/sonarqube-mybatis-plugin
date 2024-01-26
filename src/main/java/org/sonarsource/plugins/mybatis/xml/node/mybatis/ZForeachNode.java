@@ -16,7 +16,8 @@ public class ZForeachNode extends BaseMybatisNode {
         return result.toString();
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         result.append(Constant.SPACE_CHAR).append(this.open).append(Constant.SPACE_CHAR);

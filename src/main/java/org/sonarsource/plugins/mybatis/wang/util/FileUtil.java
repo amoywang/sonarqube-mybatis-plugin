@@ -8,7 +8,7 @@ import java.util.List;
 
 public enum FileUtil {
     ;
-    
+
     private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 
     public static void getFileList(String filePath, String suffix, List<String> filelist) {

@@ -1,1 +1,0 @@
-[成功]SQL ID:queryMerchantCooperationApplyPage, SQL语句: select m.name merchantname,a.status ,a.create_time,c.name,c.telephone from ssp_merchant_cooperation_application a inner join ssp_merchant m on a.initiator_merchant_id =m.id inner join ssp_merchant_contact c on a.partner_merchant_id =c.merchant_id where a.initiator_merchant_id = 'initiatormerchantid' order by a.create_time desc

@@ -3,6 +3,7 @@ package org.sonarsource.plugins.mybatis.sql;
 public class ErrorMessage {
     private String ruleId;
     private String errorMessage;
+
     public ErrorMessage() {
     }
 

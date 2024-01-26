@@ -1,15 +1,16 @@
 package org.sonarsource.plugins.mybatis.wang.enums;
 
 import org.apache.commons.lang.StringUtils;
+import org.sonar.api.rule.Severity;
 
-/* loaded from: sql_scanner-3.2.3-SNAPSHOT.jar:com/zhang/zmain/enums/DegreeEnum.class */
 public enum DegreeEnum {
-    BLOCKED("Blocked", "阻塞"),
-    CRITICAL("Critical", "致命"),
-    MAJOR("Major", "严重");
-    
-    private String code;
-    private String desc;
+    BLOCKED(Severity.BLOCKER, "阻塞"),
+    CRITICAL(Severity.CRITICAL, "致命"),
+    MINOR(Severity.MINOR, "次要"),
+    MAJOR(Severity.MAJOR, "严重");
+
+    private final String code;
+    private final String desc;
 
     DegreeEnum(String code, String desc) {
         this.code = code;
