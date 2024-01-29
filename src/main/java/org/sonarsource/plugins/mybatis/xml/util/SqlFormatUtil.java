@@ -2,7 +2,7 @@ package org.sonarsource.plugins.mybatis.xml.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonarsource.plugins.mybatis.wang.util.StringUtil;
+import org.sonarsource.plugins.mybatis.regular.util.StringUtil;
 import org.sonarsource.plugins.mybatis.xml.consts.Constant;
 
 import java.util.regex.Matcher;

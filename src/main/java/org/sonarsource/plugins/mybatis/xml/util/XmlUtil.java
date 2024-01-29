@@ -50,7 +50,7 @@ public enum XmlUtil {
                         xmlSqlTagGlobalMap.put(includeSqlId2, elementList);
                     } else {
                         xmlSqlTagGlobalMap.get(includeSqlId2).add(sqlElement);
-                        log.info("注意含有重复<sql id=[" + includeSqlId2 + "]>");
+                        log.warn("注意含有重复<sql id=[" + includeSqlId2 + "]>");
                     }
                 }
                 return;

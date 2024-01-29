@@ -1,7 +1,7 @@
 package org.sonarsource.plugins.mybatis.xml.node.mybatis;
 
 import org.apache.commons.lang.StringUtils;
-import org.sonarsource.plugins.mybatis.wang.util.StringUtil;
+import org.sonarsource.plugins.mybatis.regular.util.StringUtil;
 import org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode;
 import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 import org.sonarsource.plugins.mybatis.xml.node.commom.TextNode;

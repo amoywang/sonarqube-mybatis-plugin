@@ -12,13 +12,13 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.xml.Xml;
-import org.sonarsource.plugins.mybatis.sql.RuleCheckResult;
-import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
-import org.sonarsource.plugins.mybatis.wang.parser.RegularRuleHandler;
-import org.sonarsource.plugins.mybatis.wang.parser.XmlBatisSqlParser;
-import org.sonarsource.plugins.mybatis.wang.pojo.XmlParseResult;
-import org.sonarsource.plugins.mybatis.wang.pojo.regular.XmlPluginRuleResult;
-import org.sonarsource.plugins.mybatis.wang.pojo.regular.XmlPluginRuleResultAll;
+import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
+import org.sonarsource.plugins.mybatis.regular.enums.RuleCodeEnum;
+import org.sonarsource.plugins.mybatis.regular.parser.RegularRuleHandler;
+import org.sonarsource.plugins.mybatis.xml.XmlBatisSqlParser;
+import org.sonarsource.plugins.mybatis.xml.XmlParseResult;
+import org.sonarsource.plugins.mybatis.regular.pojo.XmlPluginRuleResult;
+import org.sonarsource.plugins.mybatis.regular.pojo.XmlPluginRuleResultAll;
 import org.sonarsource.plugins.mybatis.xml.pojo.XmlNodeParserResult;
 
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class MyBatisLintSensor implements Sensor {
             mapperFiles.add(xmlFilePath);
         }
         XmlBatisSqlParser xmlBatisSqlParser = new XmlBatisSqlParser();
-        List<XmlParseResult> results = xmlBatisSqlParser.parseXml(mapperFiles, null, "mysql");
+        List<XmlParseResult> results = xmlBatisSqlParser.parseXml(mapperFiles, "mysql");
         List<ErrorDataFromLinter> mybatisError = new ArrayList<>();
         // SQL 表达式检测结果
         for (XmlParseResult temp : results) {

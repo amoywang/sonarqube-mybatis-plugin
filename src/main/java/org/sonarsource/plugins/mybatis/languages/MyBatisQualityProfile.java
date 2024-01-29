@@ -3,7 +3,7 @@ package org.sonarsource.plugins.mybatis.languages;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.plugins.xml.Xml;
 import org.sonarsource.plugins.mybatis.sql.AbstractRule;
-import org.sonarsource.plugins.mybatis.wang.enums.RuleCodeEnum;
+import org.sonarsource.plugins.mybatis.regular.enums.RuleCodeEnum;
 
 import java.util.HashMap;
 import java.util.Map;

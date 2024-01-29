@@ -2,6 +2,7 @@ package org.sonarsource.plugins.mybatis.sql;
 
 import com.alibaba.druid.sql.ast.SQLObject;
 import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
+import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
 
 import java.util.List;
 

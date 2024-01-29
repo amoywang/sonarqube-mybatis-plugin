@@ -2,7 +2,7 @@ package org.sonarsource.plugins.mybatis.xml.pojo;
 
 import com.alibaba.druid.sql.visitor.SchemaStatVisitor;
 import com.alibaba.druid.stat.TableStat;
-import org.sonarsource.plugins.mybatis.sql.RuleCheckResult;
+import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
 import org.sonarsource.plugins.mybatis.xml.exception.base.BaseException;
 
 import java.util.List;

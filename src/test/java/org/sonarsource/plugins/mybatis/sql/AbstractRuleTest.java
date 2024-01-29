@@ -3,6 +3,7 @@ package org.sonarsource.plugins.mybatis.sql;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import org.junit.Test;
+import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
 
 import java.util.ArrayList;
 import java.util.List;
