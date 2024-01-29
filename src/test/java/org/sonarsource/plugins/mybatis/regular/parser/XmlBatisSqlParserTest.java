@@ -9,6 +9,7 @@ import org.sonarsource.plugins.mybatis.regular.util.FileUtil;
 import org.sonarsource.plugins.mybatis.xml.XmlBatisSqlParser;
 import org.sonarsource.plugins.mybatis.xml.XmlParseResult;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,8 @@ public class XmlBatisSqlParserTest {
         try {
             XmlBatisSqlParser xmlBatisSqlParser = new XmlBatisSqlParser();
             List<String> xmlFileList = new ArrayList<>();
-            String xmlDirPath = "E:\\github_workspace\\sonar-mybatis-1.0.7\\src\\test\\resources\\mapper";
-            FileUtil.getFileList(xmlDirPath, ".xml", xmlFileList);
+            URL data = XmlBatisSqlParserTest.class.getClassLoader().getResource("mapper");
+            FileUtil.getFileList(data.getPath(), ".xml", xmlFileList);
             List<XmlParseResult> results = xmlBatisSqlParser.parseXml(xmlFileList, "mysql");
             System.out.printf("SQL表达式解析完成,请查看:  \n");
             for(XmlParseResult result:results){

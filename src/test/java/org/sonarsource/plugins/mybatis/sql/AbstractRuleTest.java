@@ -2,6 +2,7 @@ package org.sonarsource.plugins.mybatis.sql;
 
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
+import org.junit.Assert;
 import org.junit.Test;
 import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
 
@@ -33,9 +34,7 @@ public class AbstractRuleTest {
                 statement.accept(rule);
             }
         }
-        for (RuleCheckResult r : results) {
-            System.out.println(r);
-        }
+        Assert.assertNotNull(results);
     }
 
 }
