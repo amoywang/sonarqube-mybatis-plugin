@@ -1,5 +1,6 @@
-## SonarQube MyBatis Plugin
-MyBatis Plugin for SonarQube: Rules to check SQL statements in MyBatis Mapper XML files.
+
+## SonarQube MyBatis Mapper XML Plugin
+MyBatis Mapper XML Plugin for SonarQube: Rules to check SQL statements in MyBatis Mapper XML files.
 
 ## What is Risk SQL?
 Risk SQL is that in the mybatis mapper file, there are some dynamic SQL, such as `<if test=""></if>` elements of Mapper file, 
@@ -19,9 +20,10 @@ WHERE 1=1
 ```
 
 ## MyBatis Rules
-There are 7 built-in mybatis rules, which select statement has three rules, update and delete statement has two rules.
+There are 23 built-in mybatis rules
 
-![mybatis-rules](images/mybatis-rule.png)
+![mybatis-rules](images/mybatis_rule.png)
+
 
 ## How to install it?
 There are two options to install a plugin into SonarQube:
@@ -39,9 +41,9 @@ To analysis mybatis mapper file, `src/main/resources` dir must be in `sonar.sour
 If you want to skip mybatis sensor sometimes, you can change the global properties `sonar.mybatis.skip` to `true` or add the parameter in the command:
 `-Dsonar.mybatis.skip=true` .
 
-## Check result
+## Check Result
 
-![mybatis-rules](images/check-result.png)
+![check_result](images/check_result.png)
 
 ## How to Add New Rule
 
@@ -53,5 +55,9 @@ If you want to skip mybatis sensor sometimes, you can change the global properti
 
 ### Regular Check
 
-- define the rule in file [org/sonarsource/plugins/mybatis/wang/enums/RuleCodeEnum.java]
-- do the rule check in file [org/sonarsource/plugins/mybatis/wang/parser/RegularRuleHandler.java#doRuleAll()]
+- define the rule in file [org/sonarsource/plugins/mybatis/regular/enums/RuleCodeEnum.java]
+- do the rule check in file [org/sonarsource/plugins/mybatis/regular/parser/RegularRuleHandler.java#doRuleAll()]
+
+## Feature
+- add more sql check rule
+- support ibatis xml check

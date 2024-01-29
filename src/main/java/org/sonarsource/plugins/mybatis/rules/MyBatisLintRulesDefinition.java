@@ -24,7 +24,7 @@ public final class MyBatisLintRulesDefinition implements RulesDefinition {
             temp = repository.createRule(tempRuleKey.rule())
                     .setName(rule.getName())
                     .setHtmlDescription(rule.getDescription())
-                    .setTags("mybatis-mapper-xml", "cndinfo")
+                    .setTags("mybatis-mapper-xml")
                     .setType(RuleType.VULNERABILITY)
                     .setSeverity(rule.getSeverity());
             temp.setDebtRemediationFunction(temp.debtRemediationFunctions().linear("10min"));
@@ -34,7 +34,7 @@ public final class MyBatisLintRulesDefinition implements RulesDefinition {
             temp = repository.createRule(tempRuleKey.rule())
                     .setName(codeEnum.getDesc())
                     .setHtmlDescription(codeEnum.getDesc())
-                    .setTags("mybatis-mapper-xml", "cndinfo")
+                    .setTags("mybatis-mapper-xml")
                     .setType(RuleType.BUG)
                     .setSeverity(codeEnum.getDegreeEnum().getCode());
             temp.setDebtRemediationFunction(temp.debtRemediationFunctions().linear("10min"));

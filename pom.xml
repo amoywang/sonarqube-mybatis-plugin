@@ -6,20 +6,20 @@
     <groupId>org.sonarsource.plugins.mybatis</groupId>
     <artifactId>sonar-mybatis-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.0.8</version>
+    <version>1.0.0</version>
 
     <name>MyBatis Plugin for SonarQube</name>
     <description>Rules to check SQL statements in MyBatis Mapper XML files</description>
-    <url>https://git.cndinfo.com/ops/sonar-mybatis</url>
+    <url>https://github.com/meguoke/sonar-mybatis-plugin</url>
     <scm>
-        <url>https://git.cndinfo.com/ops/sonar-mybatis</url>
+        <url>https://github.com/meguoke/sonar-mybatis-plugin</url>
     </scm>
     <issueManagement>
-        <url>https://git.cndinfo.com/ops/sonar-mybatis/issues</url>
+        <url>https://github.com/meguoke/sonar-mybatis-plugin/issues</url>
     </issueManagement>
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://git.cndinfo.com/ops/sonar-mybatis</url>
+        <url>https://github.com/meguoke/sonar-mybatis-plugin</url>
     </ciManagement>
 
     <properties>
