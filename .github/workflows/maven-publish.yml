@@ -29,6 +29,5 @@ jobs:
       run: mvn -B clean compile  sonar-packaging:sonar-plugin --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy
-      env:
-        GITHUB_TOKEN: ${{ package_token }}
+      run: mvn deploy -s $GITHUB_WORKSPACE/.m2/settings.xml
+     
