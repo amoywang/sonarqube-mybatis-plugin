@@ -21,7 +21,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Apache Maven Packages</name>
-            <url>https://github.com/amoywang/sonar-mybatis-plugin</url>
+            <url>https://maven.pkg.github.com/amoywang/sonar-mybatis-plugin</url>
         </repository>
     </distributionManagement>
     <properties>
