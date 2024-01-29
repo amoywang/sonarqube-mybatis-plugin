@@ -10,18 +10,20 @@
 
     <name>MyBatis Plugin for SonarQube</name>
     <description>Rules to check SQL statements in MyBatis Mapper XML files</description>
-    <url>https://github.com/meguoke/sonar-mybatis-plugin</url>
+    <url>https://github.com/amoywang/sonar-mybatis-plugin</url>
     <scm>
-        <url>https://github.com/meguoke/sonar-mybatis-plugin</url>
+        <url>https://github.com/amoywang/sonar-mybatis-plugin</url>
     </scm>
     <issueManagement>
-        <url>https://github.com/meguoke/sonar-mybatis-plugin/issues</url>
+        <url>https://github.com/amoywang/sonar-mybatis-plugin/issues</url>
     </issueManagement>
-    <ciManagement>
-        <system>Travis CI</system>
-        <url>https://github.com/meguoke/sonar-mybatis-plugin</url>
-    </ciManagement>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Apache Maven Packages</name>
+            <url>https://github.com/amoywang/sonar-mybatis-plugin</url>
+        </repository>
+    </distributionManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.apiVersion>9.0.0.45539</sonar.apiVersion>
