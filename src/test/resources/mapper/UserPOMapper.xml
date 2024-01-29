@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础层：用户信息-Mapper -->
+<mapper namespace="com.example.repository.impl.user.mapper.UserPOMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.repository.impl.user.po.UserPO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="nick_name" property="nickName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, read_protocol,user_id, nick_name
+    </sql>
+    <sql id="Base_Column_List">
+        id, read_protocol,user_id, nick_name
+    </sql>
+    <select id="getByUserId" resultType="com.example.repository.impl.user.po.UserPO">
+        select * from ssp_user where user_id =#{id}
+    </select>
+
+    <update id="updateUserAvatar">
+        update ssp_user u set u.avatar =#{userPO.avatar} where u.user_id =#{userPO.userId}
+    </update>
+
+    <resultMap id="userQueryPageMap" type="com.example.system.dto.response.SystemUserPageQueryDTO">
+        <id column="id" property="id"/>
+        <id column="user_id" property="userId"/>
+        <result column="real_name" property="realName"/>
+        <result column="real_name_logic" property="userRegisterStatus"/>
+    </resultMap>
+
+    <select id="userQueryPage" resultMap="userQueryPageMap">
+        select
+        su.user_id as id,
+        su.id as user_id,
+        su.enabled as enabled,
+        su.real_name as real_name,
+        (case when su.real_name is null then '未实名' else '已实名' end) as real_name_logic,
+        su.real_name as user_register_status,
+        su.enabled,
+        <!--        (case su.enabled when '0' then '禁用' when '1' then '启用' end) as user_status_logic,-->
+        su.telephone as telephone,
+        su.create_time as create_time
+        from
+        ssp_user su
+        where 1=1
+        <if test="query.userStatus !=null and query.userStatus != ''">
+            and enabled = #{query.userStatus}
+        </if>
+        <if test="query.userName !=null and query.userName != ''">
+            <!--            and su.real_name like concat('%',#{query.userName},'%')-->
+            and
+            if (su.real_name is not null ,su.real_name,concat('手机用户',substr(telephone,-4)))
+            like concat('%',#{query.userName},'%')
+        </if>
+        <if test="query.telephoneNumber !=null and query.telephoneNumber != ''">
+            and su.telephone like concat('%',#{query.telephoneNumber},'%')
+        </if>
+        <if test="query.registerTime !=null and query.registerTime.size() >0">
+            <!--            and #{query.registerTime} = date_format(su.create_time,'%Y-%m-%d')-->
+            and (date_format(su.create_time,'%Y-%m-%d') between #{query.registerTime[0]} and #{query.registerTime[1]})
+        </if>
+        <if test="query.userRegisterStatus !=null and query.userRegisterStatus != ''">
+            <if test="query.userRegisterStatus == 1">
+                and su.real_name is not null
+            </if>
+            <if test="query.userRegisterStatus == 0">
+                and su.real_name is null
+            </if>
+        </if>
+        order by su.create_time desc
+    </select>
+
+    <select id="getById" resultType="com.example.repository.impl.user.po.UserPO">
+        select id from ssp_user where id =${id}
+    </select>
+    <delete id="getByIdEX12" resultType="com.example.repository.impl.user.po.UserPO">
+        delete  from ssp_user
+    </delete>
+    <delete id="getByIdEX" resultType="com.example.repository.impl.user.po.UserPO">
+        delete  from ssp_user where id =${id}
+    </delete>
+</mapper>
