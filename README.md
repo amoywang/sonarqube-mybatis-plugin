@@ -66,7 +66,7 @@ If you want to skip mybatis sensor sometimes, you can change the global properti
 - define the rule in file [org/sonarsource/plugins/mybatis/regular/enums/RuleCodeEnum.java]
 - do the rule check in file [org/sonarsource/plugins/mybatis/regular/parser/RegularRuleHandler.java#doRuleAll()]
 
-## Feature
+## Future Feature
 - add more sql check rule
 - support ibatis xml check
 
