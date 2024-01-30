@@ -42,6 +42,7 @@ public class BaseMybatisNode implements INode {
 
     @Override
     public void setProperty(String property) {
+        throw new UnsupportedOperationException("Mybatis not support this method");
     }
 
     @Override

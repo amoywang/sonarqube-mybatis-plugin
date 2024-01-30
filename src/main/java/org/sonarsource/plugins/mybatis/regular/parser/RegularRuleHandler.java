@@ -159,7 +159,7 @@ public class RegularRuleHandler {
             XmlPluginRuleResult ruleInsertMustHaveColumns = RuleUtil.doRuleInsertMustHaveColumns(xmlParseResult, ruleCodeEnum15);
             if (null != ruleInsertMustHaveColumns) {
                 xmlPluginRuleResultAll.getRuleMap().computeIfAbsent(ruleCodeEnum15, k16 -> {
-                    return new ArrayList();
+                    return new ArrayList<>();
                 });
                 List<XmlPluginRuleResult> list16 = xmlPluginRuleResultAll.getRuleMap().get(ruleCodeEnum15);
                 list16.add(ruleInsertMustHaveColumns);

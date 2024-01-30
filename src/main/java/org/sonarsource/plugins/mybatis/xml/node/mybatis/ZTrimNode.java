@@ -1,6 +1,5 @@
 package org.sonarsource.plugins.mybatis.xml.node.mybatis;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.sonarsource.plugins.mybatis.xml.consts.Constant;
 import org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode;
@@ -8,14 +7,6 @@ import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 import org.sonarsource.plugins.mybatis.xml.node.commom.TextNode;
 
 public class ZTrimNode extends BaseMybatisNode {
-    public static void main(String[] args) {
-        String[] temp = "AND | OR".split("\\|");
-        System.out.println(JSON.toJSONString(temp));
-        System.out.println("  a a a s s ".trim().replaceFirst("a", "com/zhang"));
-        int index = "abc ab bb aa zhang".lastIndexOf("com/zhang");
-        System.out.println("abc ab bb aa zhang".substring(0, index));
-    }
-
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

@@ -183,8 +183,4 @@ public class SqlFormatUtil {
         String newSql4 = newSql3.replaceAll("#\\{([a-zA-Z0-9]*)\\s*}", "'$1'");
         return newSql4;
     }
-
-    public static void main(String[] args) {
-        System.out.println(mybatisFormat("update bigdata_job_base set monitor_id =  #{monitorid} where 1=1 and 2=2"));
-    }
 }

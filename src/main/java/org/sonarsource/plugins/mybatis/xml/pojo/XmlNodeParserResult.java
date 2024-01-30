@@ -49,149 +49,149 @@ public class XmlNodeParserResult {
         if (o instanceof XmlNodeParserResult) {
             XmlNodeParserResult other = (XmlNodeParserResult) o;
             if (other.canEqual(this)) {
-                Object this$sqlNodeId = getSqlNodeId();
-                Object other$sqlNodeId = other.getSqlNodeId();
-                if (this$sqlNodeId == null) {
-                    if (other$sqlNodeId != null) {
+                Object thissqlNodeId = getSqlNodeId();
+                Object othersqlNodeId = other.getSqlNodeId();
+                if (thissqlNodeId == null) {
+                    if (othersqlNodeId != null) {
                         return false;
                     }
-                } else if (!this$sqlNodeId.equals(other$sqlNodeId)) {
+                } else if (!thissqlNodeId.equals(othersqlNodeId)) {
                     return false;
                 }
-                Object this$sqlNodeIdOrg = getSqlNodeIdOrg();
-                Object other$sqlNodeIdOrg = other.getSqlNodeIdOrg();
-                if (this$sqlNodeIdOrg == null) {
-                    if (other$sqlNodeIdOrg != null) {
+                Object thissqlNodeIdOrg = getSqlNodeIdOrg();
+                Object othersqlNodeIdOrg = other.getSqlNodeIdOrg();
+                if (thissqlNodeIdOrg == null) {
+                    if (othersqlNodeIdOrg != null) {
                         return false;
                     }
-                } else if (!this$sqlNodeIdOrg.equals(other$sqlNodeIdOrg)) {
+                } else if (!thissqlNodeIdOrg.equals(othersqlNodeIdOrg)) {
                     return false;
                 }
-                Object this$nodeOptType = getNodeOptType();
-                Object other$nodeOptType = other.getNodeOptType();
-                if (this$nodeOptType == null) {
-                    if (other$nodeOptType != null) {
+                Object thisnodeOptType = getNodeOptType();
+                Object othernodeOptType = other.getNodeOptType();
+                if (thisnodeOptType == null) {
+                    if (othernodeOptType != null) {
                         return false;
                     }
-                } else if (!this$nodeOptType.equals(other$nodeOptType)) {
+                } else if (!thisnodeOptType.equals(othernodeOptType)) {
                     return false;
                 }
                 if (isContainIfTest() == other.isContainIfTest() && isDynamicSql() == other.isDynamicSql() && isIncludeSql() == other.isIncludeSql()) {
-                    Object this$nodeAsXmlNoInclude = getNodeAsXmlNoInclude();
-                    Object other$nodeAsXmlNoInclude = other.getNodeAsXmlNoInclude();
-                    if (this$nodeAsXmlNoInclude == null) {
-                        if (other$nodeAsXmlNoInclude != null) {
+                    Object thisnodeAsXmlNoInclude = getNodeAsXmlNoInclude();
+                    Object othernodeAsXmlNoInclude = other.getNodeAsXmlNoInclude();
+                    if (thisnodeAsXmlNoInclude == null) {
+                        if (othernodeAsXmlNoInclude != null) {
                             return false;
                         }
-                    } else if (!this$nodeAsXmlNoInclude.equals(other$nodeAsXmlNoInclude)) {
+                    } else if (!thisnodeAsXmlNoInclude.equals(othernodeAsXmlNoInclude)) {
                         return false;
                     }
-                    Object this$nameSpace = getNameSpace();
-                    Object other$nameSpace = other.getNameSpace();
-                    if (this$nameSpace == null) {
-                        if (other$nameSpace != null) {
+                    Object thisnameSpace = getNameSpace();
+                    Object othernameSpace = other.getNameSpace();
+                    if (thisnameSpace == null) {
+                        if (othernameSpace != null) {
                             return false;
                         }
-                    } else if (!this$nameSpace.equals(other$nameSpace)) {
+                    } else if (!thisnameSpace.equals(othernameSpace)) {
                         return false;
                     }
-                    Object this$xmlComment = getXmlComment();
-                    Object other$xmlComment = other.getXmlComment();
-                    if (this$xmlComment == null) {
-                        if (other$xmlComment != null) {
+                    Object thisxmlComment = getXmlComment();
+                    Object otherxmlComment = other.getXmlComment();
+                    if (thisxmlComment == null) {
+                        if (otherxmlComment != null) {
                             return false;
                         }
-                    } else if (!this$xmlComment.equals(other$xmlComment)) {
+                    } else if (!thisxmlComment.equals(otherxmlComment)) {
                         return false;
                     }
-                    Object this$formatSql = getFormatSql();
-                    Object other$formatSql = other.getFormatSql();
-                    if (this$formatSql == null) {
-                        if (other$formatSql != null) {
+                    Object thisformatSql = getFormatSql();
+                    Object otherformatSql = other.getFormatSql();
+                    if (thisformatSql == null) {
+                        if (otherformatSql != null) {
                             return false;
                         }
-                    } else if (!this$formatSql.equals(other$formatSql)) {
+                    } else if (!thisformatSql.equals(otherformatSql)) {
                         return false;
                     }
-                    Object this$druidFormatSql = getDruidFormatSql();
-                    Object other$druidFormatSql = other.getDruidFormatSql();
-                    if (this$druidFormatSql == null) {
-                        if (other$druidFormatSql != null) {
+                    Object thisdruidFormatSql = getDruidFormatSql();
+                    Object otherdruidFormatSql = other.getDruidFormatSql();
+                    if (thisdruidFormatSql == null) {
+                        if (otherdruidFormatSql != null) {
                             return false;
                         }
-                    } else if (!this$druidFormatSql.equals(other$druidFormatSql)) {
+                    } else if (!thisdruidFormatSql.equals(otherdruidFormatSql)) {
                         return false;
                     }
-                    Object this$visitor = getVisitor();
-                    Object other$visitor = other.getVisitor();
-                    if (this$visitor == null) {
-                        if (other$visitor != null) {
+                    Object thisvisitor = getVisitor();
+                    Object othervisitor = other.getVisitor();
+                    if (thisvisitor == null) {
+                        if (othervisitor != null) {
                             return false;
                         }
-                    } else if (!this$visitor.equals(other$visitor)) {
+                    } else if (!thisvisitor.equals(othervisitor)) {
                         return false;
                     }
-                    Object this$xmlType = getXmlType();
-                    Object other$xmlType = other.getXmlType();
-                    if (this$xmlType == null) {
-                        if (other$xmlType != null) {
+                    Object thisxmlType = getXmlType();
+                    Object otherxmlType = other.getXmlType();
+                    if (thisxmlType == null) {
+                        if (otherxmlType != null) {
                             return false;
                         }
-                    } else if (!this$xmlType.equals(other$xmlType)) {
+                    } else if (!thisxmlType.equals(otherxmlType)) {
                         return false;
                     }
-                    Object this$xmlFilePath = getXmlFilePath();
-                    Object other$xmlFilePath = other.getXmlFilePath();
-                    if (this$xmlFilePath == null) {
-                        if (other$xmlFilePath != null) {
+                    Object thisxmlFilePath = getXmlFilePath();
+                    Object otherxmlFilePath = other.getXmlFilePath();
+                    if (thisxmlFilePath == null) {
+                        if (otherxmlFilePath != null) {
                             return false;
                         }
-                    } else if (!this$xmlFilePath.equals(other$xmlFilePath)) {
+                    } else if (!thisxmlFilePath.equals(otherxmlFilePath)) {
                         return false;
                     }
-                    Object this$statusCode = getStatusCode();
-                    Object other$statusCode = other.getStatusCode();
-                    if (this$statusCode == null) {
-                        if (other$statusCode != null) {
+                    Object thisstatusCode = getStatusCode();
+                    Object otherstatusCode = other.getStatusCode();
+                    if (thisstatusCode == null) {
+                        if (otherstatusCode != null) {
                             return false;
                         }
-                    } else if (!this$statusCode.equals(other$statusCode)) {
+                    } else if (!thisstatusCode.equals(otherstatusCode)) {
                         return false;
                     }
-                    Object this$errorMsg = getErrorMsg();
-                    Object other$errorMsg = other.getErrorMsg();
-                    if (this$errorMsg == null) {
-                        if (other$errorMsg != null) {
+                    Object thiserrorMsg = getErrorMsg();
+                    Object othererrorMsg = other.getErrorMsg();
+                    if (thiserrorMsg == null) {
+                        if (othererrorMsg != null) {
                             return false;
                         }
-                    } else if (!this$errorMsg.equals(other$errorMsg)) {
+                    } else if (!thiserrorMsg.equals(othererrorMsg)) {
                         return false;
                     }
-                    Object this$exception = getException();
-                    Object other$exception = other.getException();
-                    if (this$exception == null) {
-                        if (other$exception != null) {
+                    Object thisexception = getException();
+                    Object otherexception = other.getException();
+                    if (thisexception == null) {
+                        if (otherexception != null) {
                             return false;
                         }
-                    } else if (!this$exception.equals(other$exception)) {
+                    } else if (!thisexception.equals(otherexception)) {
                         return false;
                     }
-                    Object this$tableStatMap = getTableStatMap();
-                    Object other$tableStatMap = other.getTableStatMap();
-                    if (this$tableStatMap == null) {
-                        if (other$tableStatMap != null) {
+                    Object thistableStatMap = getTableStatMap();
+                    Object othertableStatMap = other.getTableStatMap();
+                    if (thistableStatMap == null) {
+                        if (othertableStatMap != null) {
                             return false;
                         }
-                    } else if (!this$tableStatMap.equals(other$tableStatMap)) {
+                    } else if (!thistableStatMap.equals(othertableStatMap)) {
                         return false;
                     }
-                    Object this$dbType = getDbType();
-                    Object other$dbType = other.getDbType();
-                    if (this$dbType == null) {
-                        if (other$dbType != null) {
+                    Object thisdbType = getDbType();
+                    Object otherdbType = other.getDbType();
+                    if (thisdbType == null) {
+                        if (otherdbType != null) {
                             return false;
                         }
-                    } else if (!this$dbType.equals(other$dbType)) {
+                    } else if (!thisdbType.equals(otherdbType)) {
                         return false;
                     }
                     return isHasDuplicated() == other.isHasDuplicated() && isHasDuplicatedSqlTagId() == other.isHasDuplicatedSqlTagId() && isExistSubSqlTagId() == other.isExistSubSqlTagId() && isExistSubSqlTagIdDuplicated() == other.isExistSubSqlTagIdDuplicated();
@@ -208,38 +208,38 @@ public class XmlNodeParserResult {
     }
 
     public int hashCode() {
-        Object $sqlNodeId = getSqlNodeId();
-        int result = (59) + ($sqlNodeId == null ? 43 : $sqlNodeId.hashCode());
-        Object $sqlNodeIdOrg = getSqlNodeIdOrg();
-        int result2 = (result * 59) + ($sqlNodeIdOrg == null ? 43 : $sqlNodeIdOrg.hashCode());
-        Object $nodeOptType = getNodeOptType();
-        int result3 = (((((((result2 * 59) + ($nodeOptType == null ? 43 : $nodeOptType.hashCode())) * 59) + (isContainIfTest() ? 79 : 97)) * 59) + (isDynamicSql() ? 79 : 97)) * 59) + (isIncludeSql() ? 79 : 97);
-        Object $nodeAsXmlNoInclude = getNodeAsXmlNoInclude();
-        int result4 = (result3 * 59) + ($nodeAsXmlNoInclude == null ? 43 : $nodeAsXmlNoInclude.hashCode());
-        Object $nameSpace = getNameSpace();
-        int result5 = (result4 * 59) + ($nameSpace == null ? 43 : $nameSpace.hashCode());
-        Object $xmlComment = getXmlComment();
-        int result6 = (result5 * 59) + ($xmlComment == null ? 43 : $xmlComment.hashCode());
-        Object $formatSql = getFormatSql();
-        int result7 = (result6 * 59) + ($formatSql == null ? 43 : $formatSql.hashCode());
-        Object $druidFormatSql = getDruidFormatSql();
-        int result8 = (result7 * 59) + ($druidFormatSql == null ? 43 : $druidFormatSql.hashCode());
-        Object $visitor = getVisitor();
-        int result9 = (result8 * 59) + ($visitor == null ? 43 : $visitor.hashCode());
-        Object $xmlType = getXmlType();
-        int result10 = (result9 * 59) + ($xmlType == null ? 43 : $xmlType.hashCode());
-        Object $xmlFilePath = getXmlFilePath();
-        int result11 = (result10 * 59) + ($xmlFilePath == null ? 43 : $xmlFilePath.hashCode());
-        Object $statusCode = getStatusCode();
-        int result12 = (result11 * 59) + ($statusCode == null ? 43 : $statusCode.hashCode());
-        Object $errorMsg = getErrorMsg();
-        int result13 = (result12 * 59) + ($errorMsg == null ? 43 : $errorMsg.hashCode());
-        Object $exception = getException();
-        int result14 = (result13 * 59) + ($exception == null ? 43 : $exception.hashCode());
-        Object $tableStatMap = getTableStatMap();
-        int result15 = (result14 * 59) + ($tableStatMap == null ? 43 : $tableStatMap.hashCode());
-        Object $dbType = getDbType();
-        return (((((((((result15 * 59) + ($dbType == null ? 43 : $dbType.hashCode())) * 59) + (isHasDuplicated() ? 79 : 97)) * 59) + (isHasDuplicatedSqlTagId() ? 79 : 97)) * 59) + (isExistSubSqlTagId() ? 79 : 97)) * 59) + (isExistSubSqlTagIdDuplicated() ? 79 : 97);
+        Object sqlNodeId = getSqlNodeId();
+        int result = (59) + (sqlNodeId == null ? 43 : sqlNodeId.hashCode());
+        Object sqlNodeIdOrg = getSqlNodeIdOrg();
+        int result2 = (result * 59) + (sqlNodeIdOrg == null ? 43 : sqlNodeIdOrg.hashCode());
+        Object nodeOptType = getNodeOptType();
+        int result3 = (((((((result2 * 59) + (nodeOptType == null ? 43 : nodeOptType.hashCode())) * 59) + (isContainIfTest() ? 79 : 97)) * 59) + (isDynamicSql() ? 79 : 97)) * 59) + (isIncludeSql() ? 79 : 97);
+        Object nodeAsXmlNoInclude = getNodeAsXmlNoInclude();
+        int result4 = (result3 * 59) + (nodeAsXmlNoInclude == null ? 43 : nodeAsXmlNoInclude.hashCode());
+        Object nameSpace = getNameSpace();
+        int result5 = (result4 * 59) + (nameSpace == null ? 43 : nameSpace.hashCode());
+        Object xmlComment = getXmlComment();
+        int result6 = (result5 * 59) + (xmlComment == null ? 43 : xmlComment.hashCode());
+        Object formatSql = getFormatSql();
+        int result7 = (result6 * 59) + (formatSql == null ? 43 : formatSql.hashCode());
+        Object druidFormatSql = getDruidFormatSql();
+        int result8 = (result7 * 59) + (druidFormatSql == null ? 43 : druidFormatSql.hashCode());
+        Object visitor = getVisitor();
+        int result9 = (result8 * 59) + (visitor == null ? 43 : visitor.hashCode());
+        Object xmlType = getXmlType();
+        int result10 = (result9 * 59) + (xmlType == null ? 43 : xmlType.hashCode());
+        Object xmlFilePath = getXmlFilePath();
+        int result11 = (result10 * 59) + (xmlFilePath == null ? 43 : xmlFilePath.hashCode());
+        Object statusCode = getStatusCode();
+        int result12 = (result11 * 59) + (statusCode == null ? 43 : statusCode.hashCode());
+        Object errorMsg = getErrorMsg();
+        int result13 = (result12 * 59) + (errorMsg == null ? 43 : errorMsg.hashCode());
+        Object exception = getException();
+        int result14 = (result13 * 59) + (exception == null ? 43 : exception.hashCode());
+        Object tableStatMap = getTableStatMap();
+        int result15 = (result14 * 59) + (tableStatMap == null ? 43 : tableStatMap.hashCode());
+        Object dbType = getDbType();
+        return (((((((((result15 * 59) + (dbType == null ? 43 : dbType.hashCode())) * 59) + (isHasDuplicated() ? 79 : 97)) * 59) + (isHasDuplicatedSqlTagId() ? 79 : 97)) * 59) + (isExistSubSqlTagId() ? 79 : 97)) * 59) + (isExistSubSqlTagIdDuplicated() ? 79 : 97);
     }
 
     public String toString() {

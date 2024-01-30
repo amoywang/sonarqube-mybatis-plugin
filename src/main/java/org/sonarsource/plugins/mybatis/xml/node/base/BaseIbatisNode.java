@@ -68,42 +68,52 @@ public class BaseIbatisNode implements INode {
 
     @Override
     public void setTest(String test) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setPrefix(String prefix) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setSuffix(String suffix) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setPrefixOverrides(String prefixOverrides) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setSuffixOverrides(String suffixOverrides) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setItem(String item) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setIndex(String index) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setCollection(String collection) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setSaparator(String saparator) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override
     public void setConfilct(String type) {
+        throw new UnsupportedOperationException("Ibatis not support this method");
     }
 
     @Override

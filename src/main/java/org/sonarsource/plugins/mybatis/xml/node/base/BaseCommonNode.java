@@ -32,14 +32,17 @@ public class BaseCommonNode implements INode {
 
     @Override
     public void setProperty(String property) {
+        throw new UnsupportedOperationException("Mybatis not support this method");
     }
 
     @Override
     public void setConfilct(String type) {
+        throw new UnsupportedOperationException("Mybatis not support this method");
     }
 
     @Override
     public void setSaparator(String saparator) {
+        throw new UnsupportedOperationException("Mybatis not support this method");
     }
 
     public String getTextValue() {
