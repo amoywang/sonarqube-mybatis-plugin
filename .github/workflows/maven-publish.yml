@@ -17,9 +17,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build with Maven
-        run: mvn package --file pom.xml -Dmaven.version=${{ github.event.release.tag_name }}
+        run: mvn package -Dmaven.version=${{ github.event.release.tag_name }}
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy -Dmaven.version=${{ github.event.release.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
