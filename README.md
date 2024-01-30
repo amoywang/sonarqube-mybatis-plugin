@@ -69,3 +69,7 @@ If you want to skip mybatis sensor sometimes, you can change the global properti
 ## Feature
 - add more sql check rule
 - support ibatis xml check
+
+## Support Author
+
+![support_me](images/img.png)
