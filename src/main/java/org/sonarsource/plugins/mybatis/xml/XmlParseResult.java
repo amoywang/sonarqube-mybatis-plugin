@@ -18,14 +18,6 @@ public class XmlParseResult extends BaseResult {
         this.mapperFilePath = mapperFilePath;
     }
 
-    public void setMapperName(String mapperName) {
-        this.mapperName = mapperName;
-    }
-
-    public void setXmlNodeParserResult(XmlNodeParserResult xmlNodeParserResult) {
-        this.xmlNodeParserResult = xmlNodeParserResult;
-    }
-
     @Override
     public String toString() {
         return "XmlParseResult(mapperName=" + getMapperName() + ",lineNumber=" + getLineNumber() +
@@ -88,7 +80,15 @@ public class XmlParseResult extends BaseResult {
         return this.mapperName;
     }
 
+    public void setMapperName(String mapperName) {
+        this.mapperName = mapperName;
+    }
+
     public XmlNodeParserResult getXmlNodeParserResult() {
         return this.xmlNodeParserResult;
+    }
+
+    public void setXmlNodeParserResult(XmlNodeParserResult xmlNodeParserResult) {
+        this.xmlNodeParserResult = xmlNodeParserResult;
     }
 }

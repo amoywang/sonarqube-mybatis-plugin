@@ -4,7 +4,7 @@ import org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode;
 import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 
 public class ZWhereNode extends BaseMybatisNode {
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(" where ");
@@ -16,7 +16,6 @@ public class ZWhereNode extends BaseMybatisNode {
     }
 
     @Override
-    // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         result.append(" where ");

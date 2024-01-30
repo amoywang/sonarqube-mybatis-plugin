@@ -11,11 +11,11 @@ import java.nio.charset.StandardCharsets;
 
 public class IOUtils {
 
+    private static final Logger LOGGER = Loggers.get(IOUtils.class);
+
     private IOUtils() {
         super();
     }
-
-    private static final Logger LOGGER = Loggers.get(IOUtils.class);
 
     /**
      * Search file, get the line number which matches the keyword firstly

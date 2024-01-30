@@ -19,9 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public enum XmlUtil {
-    ;
-
+public class XmlUtil {
     private static final Logger log = LoggerFactory.getLogger(XmlUtil.class);
 
     public static void parseXmlNodeSqlTag(String xmlFilePath, Map<String, List<Element>> xmlSqlTagGlobalMap) throws Exception {

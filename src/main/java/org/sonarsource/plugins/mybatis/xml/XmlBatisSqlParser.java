@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.plugins.mybatis.sql.parser.MybatisParser;
 import org.sonarsource.plugins.mybatis.xml.consts.Constant;
-import org.sonarsource.plugins.mybatis.xml.consts.ErrorCodeEnum;
 import org.sonarsource.plugins.mybatis.xml.pojo.XmlNode;
 import org.sonarsource.plugins.mybatis.xml.pojo.XmlNodeParserResult;
 import org.sonarsource.plugins.mybatis.xml.util.DruidVisitorUtil;

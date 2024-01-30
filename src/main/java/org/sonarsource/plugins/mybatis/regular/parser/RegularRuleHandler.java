@@ -3,10 +3,10 @@ package org.sonarsource.plugins.mybatis.regular.parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.plugins.mybatis.regular.enums.RuleCodeEnum;
-import org.sonarsource.plugins.mybatis.xml.XmlParseResult;
 import org.sonarsource.plugins.mybatis.regular.pojo.XmlPluginRuleResult;
 import org.sonarsource.plugins.mybatis.regular.pojo.XmlPluginRuleResultAll;
 import org.sonarsource.plugins.mybatis.regular.util.RuleUtil;
+import org.sonarsource.plugins.mybatis.xml.XmlParseResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,7 +159,7 @@ public class RegularRuleHandler {
             XmlPluginRuleResult ruleInsertMustHaveColumns = RuleUtil.doRuleInsertMustHaveColumns(xmlParseResult, ruleCodeEnum15);
             if (null != ruleInsertMustHaveColumns) {
                 xmlPluginRuleResultAll.getRuleMap().computeIfAbsent(ruleCodeEnum15, k16 -> {
-                    return new ArrayList();
+                    return new ArrayList<>();
                 });
                 List<XmlPluginRuleResult> list16 = xmlPluginRuleResultAll.getRuleMap().get(ruleCodeEnum15);
                 list16.add(ruleInsertMustHaveColumns);

@@ -21,9 +21,7 @@ import org.sonarsource.plugins.mybatis.xml.exception.DruidParseException;
 import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
-public enum DruidVisitorUtil {
-    ;
-
+public class DruidVisitorUtil {
     private static final Logger log = LoggerFactory.getLogger(DruidVisitorUtil.class);
 
     public static SchemaStatVisitor getVisitor(String sql, String dbType) throws DruidParseException {

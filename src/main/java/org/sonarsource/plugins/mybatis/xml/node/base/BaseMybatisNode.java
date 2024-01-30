@@ -18,160 +18,161 @@ public class BaseMybatisNode implements INode {
     protected boolean propertyConfilct = false;
     protected List<INode> sonParseResult = new ArrayList();
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setPrefixOverrides(String prefixOverrides) {
-        this.prefixOverrides = prefixOverrides;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setSuffixOverrides(String suffixOverrides) {
-        this.suffixOverrides = suffixOverrides;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setItem(String item) {
-        this.item = item;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setIndex(String index) {
-        this.index = index;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setOpen(String open) {
-        this.open = open;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setClose(String close) {
-        this.close = close;
-    }
-
-    public void setSeparator(String separator) {
-        this.separator = separator;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setTest(String test) {
-        this.test = test;
+    public boolean isPropertyConfilct() {
+        return this.propertyConfilct;
     }
 
     public void setPropertyConfilct(boolean propertyConfilct) {
         this.propertyConfilct = propertyConfilct;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setSonParseResult(List<INode> sonParseResult) {
-        this.sonParseResult = sonParseResult;
-    }
-
-    public boolean isPropertyConfilct() {
-        return this.propertyConfilct;
-    }
-
     public List<INode> getSonParseResult() {
         return this.sonParseResult;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
+    public void setSonParseResult(List<INode> sonParseResult) {
+        this.sonParseResult = sonParseResult;
+    }
+
+    @Override
     public String toHtmlString() {
         return null;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setProperty(String property) {
+        throw new UnsupportedOperationException("Mybatis not support this method");
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setRemoveFirstPrepend(boolean removeFirstPrepend) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCompareProperty(String compareProperty) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCompareValue(String compareValue) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setConjunction(String conjunction) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setConfilct(String type) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSaparator(String saparator) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setPrepend(String prepend) {
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String getPrepend() {
         return null;
+    }
+
+    @Override
+    public void setPrepend(String prepend) {
     }
 
     public String getPrefix() {
         return this.prefix;
     }
 
+    @Override
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     public String getSuffix() {
         return this.suffix;
+    }
+
+    @Override
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 
     public String getPrefixOverrides() {
         return this.prefixOverrides;
     }
 
+    @Override
+    public void setPrefixOverrides(String prefixOverrides) {
+        this.prefixOverrides = prefixOverrides;
+    }
+
     public String getSuffixOverrides() {
         return this.suffixOverrides;
+    }
+
+    @Override
+    public void setSuffixOverrides(String suffixOverrides) {
+        this.suffixOverrides = suffixOverrides;
     }
 
     public String getItem() {
         return this.item;
     }
 
+    @Override
+    public void setItem(String item) {
+        this.item = item;
+    }
+
     public String getIndex() {
         return this.index;
+    }
+
+    @Override
+    public void setIndex(String index) {
+        this.index = index;
     }
 
     public String getCollection() {
         return this.collection;
     }
 
+    @Override
+    public void setCollection(String collection) {
+        this.collection = collection;
+    }
+
     public String getOpen() {
         return this.open;
+    }
+
+    @Override
+    public void setOpen(String open) {
+        this.open = open;
     }
 
     public String getClose() {
         return this.close;
     }
 
+    @Override
+    public void setClose(String close) {
+        this.close = close;
+    }
+
     public String getSeparator() {
         return this.separator;
     }
 
+    public void setSeparator(String separator) {
+        this.separator = separator;
+    }
+
     public String getTest() {
         return this.test;
+    }
+
+    @Override
+    public void setTest(String test) {
+        this.test = test;
     }
 }

@@ -33,14 +33,14 @@ import java.util.Map;
 
 public class IbatisParser {
     private static final Logger log = LoggerFactory.getLogger(IbatisParser.class);
-    private String nodeAsXml;
     private final XmlNode xmlNode;
-    private String dbType;
     private final Map<String, Element> xmlIncludeNodeMap;
+    private final Map<String, String> propertyCacheMap = new HashMap();
+    private String nodeAsXml;
+    private String dbType;
     private boolean containIfTest;
     private boolean isDynamicSql = false;
     private boolean isIncludeSql = false;
-    private final Map<String, String> propertyCacheMap = new HashMap();
 
     public IbatisParser(XmlNode xmlNode, Map<String, Element> xmlIncludeNodeMap, String xmlFilePath, String dbType) {
         this.dbType = null;

@@ -8,7 +8,7 @@ public enum RuleCodeEnum {
     R0003(true, DegreeEnum.BLOCKED, "mapper重复sql_id"),
     R0004(true, DegreeEnum.BLOCKED, "refid引用id不存在"),
     R0005(true, DegreeEnum.BLOCKED, "refid引用id存在重复"),
-//    R1001(true, DegreeEnum.CRITICAL, "禁止select星号"),
+    //    R1001(true, DegreeEnum.CRITICAL, "禁止select星号"),
 //    R1002(true, DegreeEnum.CRITICAL, "参数必须使用#{}，不允许使用${}"),
     R1003(true, DegreeEnum.CRITICAL, "禁止update,delete不带条件"),
     R1004(true, DegreeEnum.CRITICAL, "update含有子查询需使用exists,否则匹配不到,字段会赋空值"),
@@ -22,9 +22,9 @@ public enum RuleCodeEnum {
     R3000(true, DegreeEnum.MAJOR, "SQL解析失败，请确认SQL是否拼写正确"),
     R9999(true, DegreeEnum.MAJOR, "可能存在语法或风险");
 
+    private final String desc;
     private boolean active;
     private DegreeEnum degreeEnum;
-    private final String desc;
 
     RuleCodeEnum(boolean active, DegreeEnum degreeEnum, String desc) {
         this.active = active;
@@ -41,9 +41,11 @@ public enum RuleCodeEnum {
         }
         throw new RuntimeException("Enum code not exist.");
     }
-    public String getName(){
+
+    public String getName() {
         return this.name();
     }
+
     public String getDesc() {
         return this.desc;
     }

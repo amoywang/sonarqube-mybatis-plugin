@@ -7,9 +7,9 @@ public interface INode {
 
     String toHtmlString();
 
-    void setPrepend(String str);
-
     String getPrepend();
+
+    void setPrepend(String str);
 
     void setOpen(String str);
 

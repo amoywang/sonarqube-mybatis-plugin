@@ -12,46 +12,6 @@ public class XmlNode implements IXmlNodes {
     private boolean hasDuplicatedXmlNode;
     private boolean hasDuplicatedSqlTagId;
 
-    public void setSqlNodeId(String sqlNodeId) {
-        this.sqlNodeId = sqlNodeId;
-    }
-
-    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
-        this.sqlNodeIdOrg = sqlNodeIdOrg;
-    }
-
-    public void setNameSpace(String nameSpace) {
-        this.nameSpace = nameSpace;
-    }
-
-    public void setNodeOptType(String nodeOptType) {
-        this.nodeOptType = nodeOptType;
-    }
-
-    public void setSqlComments(String sqlComments) {
-        this.sqlComments = sqlComments;
-    }
-
-    public void setNodeAsXml(String nodeAsXml) {
-        this.nodeAsXml = nodeAsXml;
-    }
-
-    public void setMapperType(String mapperType) {
-        this.mapperType = mapperType;
-    }
-
-    public void setXmlFilePath(String xmlFilePath) {
-        this.xmlFilePath = xmlFilePath;
-    }
-
-    public void setHasDuplicatedXmlNode(boolean hasDuplicatedXmlNode) {
-        this.hasDuplicatedXmlNode = hasDuplicatedXmlNode;
-    }
-
-    public void setHasDuplicatedSqlTagId(boolean hasDuplicatedSqlTagId) {
-        this.hasDuplicatedSqlTagId = hasDuplicatedSqlTagId;
-    }
-
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -59,76 +19,76 @@ public class XmlNode implements IXmlNodes {
         if (o instanceof XmlNode) {
             XmlNode other = (XmlNode) o;
             if (other.canEqual(this)) {
-                Object this$sqlNodeId = getSqlNodeId();
-                Object other$sqlNodeId = other.getSqlNodeId();
-                if (this$sqlNodeId == null) {
-                    if (other$sqlNodeId != null) {
+                Object thissqlNodeId = getSqlNodeId();
+                Object othersqlNodeId = other.getSqlNodeId();
+                if (thissqlNodeId == null) {
+                    if (othersqlNodeId != null) {
                         return false;
                     }
-                } else if (!this$sqlNodeId.equals(other$sqlNodeId)) {
+                } else if (!thissqlNodeId.equals(othersqlNodeId)) {
                     return false;
                 }
-                Object this$sqlNodeIdOrg = getSqlNodeIdOrg();
-                Object other$sqlNodeIdOrg = other.getSqlNodeIdOrg();
-                if (this$sqlNodeIdOrg == null) {
-                    if (other$sqlNodeIdOrg != null) {
+                Object thissqlNodeIdOrg = getSqlNodeIdOrg();
+                Object othersqlNodeIdOrg = other.getSqlNodeIdOrg();
+                if (thissqlNodeIdOrg == null) {
+                    if (othersqlNodeIdOrg != null) {
                         return false;
                     }
-                } else if (!this$sqlNodeIdOrg.equals(other$sqlNodeIdOrg)) {
+                } else if (!thissqlNodeIdOrg.equals(othersqlNodeIdOrg)) {
                     return false;
                 }
-                Object this$nameSpace = getNameSpace();
-                Object other$nameSpace = other.getNameSpace();
-                if (this$nameSpace == null) {
-                    if (other$nameSpace != null) {
+                Object thisnameSpace = getNameSpace();
+                Object othernameSpace = other.getNameSpace();
+                if (thisnameSpace == null) {
+                    if (othernameSpace != null) {
                         return false;
                     }
-                } else if (!this$nameSpace.equals(other$nameSpace)) {
+                } else if (!thisnameSpace.equals(othernameSpace)) {
                     return false;
                 }
-                Object this$nodeOptType = getNodeOptType();
-                Object other$nodeOptType = other.getNodeOptType();
-                if (this$nodeOptType == null) {
-                    if (other$nodeOptType != null) {
+                Object thisnodeOptType = getNodeOptType();
+                Object othernodeOptType = other.getNodeOptType();
+                if (thisnodeOptType == null) {
+                    if (othernodeOptType != null) {
                         return false;
                     }
-                } else if (!this$nodeOptType.equals(other$nodeOptType)) {
+                } else if (!thisnodeOptType.equals(othernodeOptType)) {
                     return false;
                 }
-                Object this$sqlComments = getSqlComments();
-                Object other$sqlComments = other.getSqlComments();
-                if (this$sqlComments == null) {
-                    if (other$sqlComments != null) {
+                Object thissqlComments = getSqlComments();
+                Object othersqlComments = other.getSqlComments();
+                if (thissqlComments == null) {
+                    if (othersqlComments != null) {
                         return false;
                     }
-                } else if (!this$sqlComments.equals(other$sqlComments)) {
+                } else if (!thissqlComments.equals(othersqlComments)) {
                     return false;
                 }
-                Object this$nodeAsXml = getNodeAsXml();
-                Object other$nodeAsXml = other.getNodeAsXml();
-                if (this$nodeAsXml == null) {
-                    if (other$nodeAsXml != null) {
+                Object thisnodeAsXml = getNodeAsXml();
+                Object othernodeAsXml = other.getNodeAsXml();
+                if (thisnodeAsXml == null) {
+                    if (othernodeAsXml != null) {
                         return false;
                     }
-                } else if (!this$nodeAsXml.equals(other$nodeAsXml)) {
+                } else if (!thisnodeAsXml.equals(othernodeAsXml)) {
                     return false;
                 }
-                Object this$mapperType = getMapperType();
-                Object other$mapperType = other.getMapperType();
-                if (this$mapperType == null) {
-                    if (other$mapperType != null) {
+                Object thismapperType = getMapperType();
+                Object othermapperType = other.getMapperType();
+                if (thismapperType == null) {
+                    if (othermapperType != null) {
                         return false;
                     }
-                } else if (!this$mapperType.equals(other$mapperType)) {
+                } else if (!thismapperType.equals(othermapperType)) {
                     return false;
                 }
-                Object this$xmlFilePath = getXmlFilePath();
-                Object other$xmlFilePath = other.getXmlFilePath();
-                if (this$xmlFilePath == null) {
-                    if (other$xmlFilePath != null) {
+                Object thisxmlFilePath = getXmlFilePath();
+                Object otherxmlFilePath = other.getXmlFilePath();
+                if (thisxmlFilePath == null) {
+                    if (otherxmlFilePath != null) {
                         return false;
                     }
-                } else if (!this$xmlFilePath.equals(other$xmlFilePath)) {
+                } else if (!thisxmlFilePath.equals(otherxmlFilePath)) {
                     return false;
                 }
                 return isHasDuplicatedXmlNode() == other.isHasDuplicatedXmlNode() && isHasDuplicatedSqlTagId() == other.isHasDuplicatedSqlTagId();
@@ -143,22 +103,22 @@ public class XmlNode implements IXmlNodes {
     }
 
     public int hashCode() {
-        Object $sqlNodeId = getSqlNodeId();
-        int result = (59) + ($sqlNodeId == null ? 43 : $sqlNodeId.hashCode());
-        Object $sqlNodeIdOrg = getSqlNodeIdOrg();
-        int result2 = (result * 59) + ($sqlNodeIdOrg == null ? 43 : $sqlNodeIdOrg.hashCode());
-        Object $nameSpace = getNameSpace();
-        int result3 = (result2 * 59) + ($nameSpace == null ? 43 : $nameSpace.hashCode());
-        Object $nodeOptType = getNodeOptType();
-        int result4 = (result3 * 59) + ($nodeOptType == null ? 43 : $nodeOptType.hashCode());
-        Object $sqlComments = getSqlComments();
-        int result5 = (result4 * 59) + ($sqlComments == null ? 43 : $sqlComments.hashCode());
-        Object $nodeAsXml = getNodeAsXml();
-        int result6 = (result5 * 59) + ($nodeAsXml == null ? 43 : $nodeAsXml.hashCode());
-        Object $mapperType = getMapperType();
-        int result7 = (result6 * 59) + ($mapperType == null ? 43 : $mapperType.hashCode());
-        Object $xmlFilePath = getXmlFilePath();
-        return (((((result7 * 59) + ($xmlFilePath == null ? 43 : $xmlFilePath.hashCode())) * 59) + (isHasDuplicatedXmlNode() ? 79 : 97)) * 59) + (isHasDuplicatedSqlTagId() ? 79 : 97);
+        Object sqlNodeId = getSqlNodeId();
+        int result = (59) + (sqlNodeId == null ? 43 : sqlNodeId.hashCode());
+        Object sqlNodeIdOrg = getSqlNodeIdOrg();
+        int result2 = (result * 59) + (sqlNodeIdOrg == null ? 43 : sqlNodeIdOrg.hashCode());
+        Object nameSpace = getNameSpace();
+        int result3 = (result2 * 59) + (nameSpace == null ? 43 : nameSpace.hashCode());
+        Object nodeOptType = getNodeOptType();
+        int result4 = (result3 * 59) + (nodeOptType == null ? 43 : nodeOptType.hashCode());
+        Object sqlComments = getSqlComments();
+        int result5 = (result4 * 59) + (sqlComments == null ? 43 : sqlComments.hashCode());
+        Object nodeAsXml = getNodeAsXml();
+        int result6 = (result5 * 59) + (nodeAsXml == null ? 43 : nodeAsXml.hashCode());
+        Object mapperType = getMapperType();
+        int result7 = (result6 * 59) + (mapperType == null ? 43 : mapperType.hashCode());
+        Object xmlFilePath = getXmlFilePath();
+        return (((((result7 * 59) + (xmlFilePath == null ? 43 : xmlFilePath.hashCode())) * 59) + (isHasDuplicatedXmlNode() ? 79 : 97)) * 59) + (isHasDuplicatedSqlTagId() ? 79 : 97);
     }
 
     public String toString() {
@@ -169,39 +129,79 @@ public class XmlNode implements IXmlNodes {
         return this.sqlNodeId;
     }
 
+    public void setSqlNodeId(String sqlNodeId) {
+        this.sqlNodeId = sqlNodeId;
+    }
+
     public String getSqlNodeIdOrg() {
         return this.sqlNodeIdOrg;
+    }
+
+    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
+        this.sqlNodeIdOrg = sqlNodeIdOrg;
     }
 
     public String getNameSpace() {
         return this.nameSpace;
     }
 
+    public void setNameSpace(String nameSpace) {
+        this.nameSpace = nameSpace;
+    }
+
     public String getNodeOptType() {
         return this.nodeOptType;
+    }
+
+    public void setNodeOptType(String nodeOptType) {
+        this.nodeOptType = nodeOptType;
     }
 
     public String getSqlComments() {
         return this.sqlComments;
     }
 
+    public void setSqlComments(String sqlComments) {
+        this.sqlComments = sqlComments;
+    }
+
     public String getNodeAsXml() {
         return this.nodeAsXml;
+    }
+
+    public void setNodeAsXml(String nodeAsXml) {
+        this.nodeAsXml = nodeAsXml;
     }
 
     public String getMapperType() {
         return this.mapperType;
     }
 
+    public void setMapperType(String mapperType) {
+        this.mapperType = mapperType;
+    }
+
     public String getXmlFilePath() {
         return this.xmlFilePath;
+    }
+
+    public void setXmlFilePath(String xmlFilePath) {
+        this.xmlFilePath = xmlFilePath;
     }
 
     public boolean isHasDuplicatedXmlNode() {
         return this.hasDuplicatedXmlNode;
     }
 
+    public void setHasDuplicatedXmlNode(boolean hasDuplicatedXmlNode) {
+        this.hasDuplicatedXmlNode = hasDuplicatedXmlNode;
+    }
+
     public boolean isHasDuplicatedSqlTagId() {
         return this.hasDuplicatedSqlTagId;
+    }
+
+    public void setHasDuplicatedSqlTagId(boolean hasDuplicatedSqlTagId) {
+        this.hasDuplicatedSqlTagId = hasDuplicatedSqlTagId;
     }
 }

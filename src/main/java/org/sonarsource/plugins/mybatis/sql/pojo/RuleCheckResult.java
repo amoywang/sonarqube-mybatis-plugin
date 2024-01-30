@@ -1,6 +1,10 @@
 package org.sonarsource.plugins.mybatis.sql.pojo;
 
 public class RuleCheckResult {
+    String obj;
+    String ruleId;
+    String message;
+
     @Override
     public String toString() {
         return "Result{" +
@@ -8,12 +12,13 @@ public class RuleCheckResult {
                 "], rule='" + ruleId + '\'' +
                 '}';
     }
-    String obj;
-    String ruleId;
-    String message;
 
     public String getRuleId() {
         return ruleId;
+    }
+
+    public void setRuleId(String ruleId) {
+        this.ruleId = ruleId;
     }
 
     public String getMessage() {
@@ -30,9 +35,5 @@ public class RuleCheckResult {
 
     public void setObj(String obj) {
         this.obj = obj;
-    }
-
-    public void setRuleId(String ruleId) {
-        this.ruleId = ruleId;
     }
 }
