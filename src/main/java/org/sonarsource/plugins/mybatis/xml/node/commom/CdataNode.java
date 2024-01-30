@@ -4,7 +4,7 @@ import org.sonarsource.plugins.mybatis.xml.node.base.BaseCommonNode;
 import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 
 public class CdataNode extends BaseCommonNode {
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (INode sonNode : this.sonParseResult) {
@@ -15,7 +15,6 @@ public class CdataNode extends BaseCommonNode {
     }
 
     @Override
-    // org.sonarsource.plugins.mybatis.xml.node.base.BaseCommonNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         for (INode sonNode : this.sonParseResult) {

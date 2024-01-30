@@ -11,10 +11,6 @@ import java.util.Objects;
 public class XmlPluginRuleResultAll {
     private Map<RuleCodeEnum, List<XmlPluginRuleResult>> ruleMap = new HashMap();
 
-    public void setRuleMap(Map<RuleCodeEnum, List<XmlPluginRuleResult>> ruleMap) {
-        this.ruleMap = ruleMap;
-    }
-
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -47,5 +43,9 @@ public class XmlPluginRuleResultAll {
 
     public Map<RuleCodeEnum, List<XmlPluginRuleResult>> getRuleMap() {
         return this.ruleMap;
+    }
+
+    public void setRuleMap(Map<RuleCodeEnum, List<XmlPluginRuleResult>> ruleMap) {
+        this.ruleMap = ruleMap;
     }
 }

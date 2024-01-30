@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class XmlNodeParserResult {
+    Map<TableStat.Name, TableStat> tableStatMap;
     private String sqlNodeId;
     private String sqlNodeIdOrg;
     private String nodeOptType;
@@ -26,7 +27,6 @@ public class XmlNodeParserResult {
     private String statusCode;
     private String errorMsg;
     private BaseException exception;
-    Map<TableStat.Name, TableStat> tableStatMap;
     private String dbType;
     private boolean hasDuplicated;
     private boolean hasDuplicatedSqlTagId;
@@ -34,104 +34,12 @@ public class XmlNodeParserResult {
     private boolean existSubSqlTagIdDuplicated;
     private List<RuleCheckResult> ruleCheckResults;
 
-    public void setRuleCheckResults(List<RuleCheckResult> ruleCheckResults) {
-        this.ruleCheckResults = ruleCheckResults;
-    }
-
     public List<RuleCheckResult> getRuleCheckResults() {
         return ruleCheckResults;
     }
 
-    public void setSqlNodeId(String sqlNodeId) {
-        this.sqlNodeId = sqlNodeId;
-    }
-
-    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
-        this.sqlNodeIdOrg = sqlNodeIdOrg;
-    }
-
-    public void setNodeOptType(String nodeOptType) {
-        this.nodeOptType = nodeOptType;
-    }
-
-    public void setContainIfTest(boolean containIfTest) {
-        this.containIfTest = containIfTest;
-    }
-
-    public void setDynamicSql(boolean dynamicSql) {
-        this.dynamicSql = dynamicSql;
-    }
-
-    public void setIncludeSql(boolean includeSql) {
-        this.includeSql = includeSql;
-    }
-
-    public void setNodeAsXmlNoInclude(String nodeAsXmlNoInclude) {
-        this.nodeAsXmlNoInclude = nodeAsXmlNoInclude;
-    }
-
-    public void setNameSpace(String nameSpace) {
-        this.nameSpace = nameSpace;
-    }
-
-    public void setXmlComment(String xmlComment) {
-        this.xmlComment = xmlComment;
-    }
-
-    public void setFormatSql(String formatSql) {
-        this.formatSql = formatSql;
-    }
-
-    public void setDruidFormatSql(String druidFormatSql) {
-        this.druidFormatSql = druidFormatSql;
-    }
-
-    public void setVisitor(SchemaStatVisitor visitor) {
-        this.visitor = visitor;
-    }
-
-    public void setXmlType(String xmlType) {
-        this.xmlType = xmlType;
-    }
-
-    public void setXmlFilePath(String xmlFilePath) {
-        this.xmlFilePath = xmlFilePath;
-    }
-
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
-    public void setException(BaseException exception) {
-        this.exception = exception;
-    }
-
-    public void setTableStatMap(Map<TableStat.Name, TableStat> tableStatMap) {
-        this.tableStatMap = tableStatMap;
-    }
-
-    public void setDbType(String dbType) {
-        this.dbType = dbType;
-    }
-
-    public void setHasDuplicated(boolean hasDuplicated) {
-        this.hasDuplicated = hasDuplicated;
-    }
-
-    public void setHasDuplicatedSqlTagId(boolean hasDuplicatedSqlTagId) {
-        this.hasDuplicatedSqlTagId = hasDuplicatedSqlTagId;
-    }
-
-    public void setExistSubSqlTagId(boolean existSubSqlTagId) {
-        this.existSubSqlTagId = existSubSqlTagId;
-    }
-
-    public void setExistSubSqlTagIdDuplicated(boolean existSubSqlTagIdDuplicated) {
-        this.existSubSqlTagIdDuplicated = existSubSqlTagIdDuplicated;
+    public void setRuleCheckResults(List<RuleCheckResult> ruleCheckResults) {
+        this.ruleCheckResults = ruleCheckResults;
     }
 
     public boolean equals(Object o) {
@@ -342,91 +250,183 @@ public class XmlNodeParserResult {
         return this.sqlNodeId;
     }
 
+    public void setSqlNodeId(String sqlNodeId) {
+        this.sqlNodeId = sqlNodeId;
+    }
+
     public String getSqlNodeIdOrg() {
         return this.sqlNodeIdOrg;
+    }
+
+    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
+        this.sqlNodeIdOrg = sqlNodeIdOrg;
     }
 
     public String getNodeOptType() {
         return this.nodeOptType;
     }
 
+    public void setNodeOptType(String nodeOptType) {
+        this.nodeOptType = nodeOptType;
+    }
+
     public boolean isContainIfTest() {
         return this.containIfTest;
+    }
+
+    public void setContainIfTest(boolean containIfTest) {
+        this.containIfTest = containIfTest;
     }
 
     public boolean isDynamicSql() {
         return this.dynamicSql;
     }
 
+    public void setDynamicSql(boolean dynamicSql) {
+        this.dynamicSql = dynamicSql;
+    }
+
     public boolean isIncludeSql() {
         return this.includeSql;
+    }
+
+    public void setIncludeSql(boolean includeSql) {
+        this.includeSql = includeSql;
     }
 
     public String getNodeAsXmlNoInclude() {
         return this.nodeAsXmlNoInclude;
     }
 
+    public void setNodeAsXmlNoInclude(String nodeAsXmlNoInclude) {
+        this.nodeAsXmlNoInclude = nodeAsXmlNoInclude;
+    }
+
     public String getNameSpace() {
         return this.nameSpace;
+    }
+
+    public void setNameSpace(String nameSpace) {
+        this.nameSpace = nameSpace;
     }
 
     public String getXmlComment() {
         return this.xmlComment;
     }
 
+    public void setXmlComment(String xmlComment) {
+        this.xmlComment = xmlComment;
+    }
+
     public String getFormatSql() {
         return this.formatSql;
+    }
+
+    public void setFormatSql(String formatSql) {
+        this.formatSql = formatSql;
     }
 
     public String getDruidFormatSql() {
         return this.druidFormatSql;
     }
 
+    public void setDruidFormatSql(String druidFormatSql) {
+        this.druidFormatSql = druidFormatSql;
+    }
+
     public SchemaStatVisitor getVisitor() {
         return this.visitor;
+    }
+
+    public void setVisitor(SchemaStatVisitor visitor) {
+        this.visitor = visitor;
     }
 
     public String getXmlType() {
         return this.xmlType;
     }
 
+    public void setXmlType(String xmlType) {
+        this.xmlType = xmlType;
+    }
+
     public String getXmlFilePath() {
         return this.xmlFilePath;
+    }
+
+    public void setXmlFilePath(String xmlFilePath) {
+        this.xmlFilePath = xmlFilePath;
     }
 
     public String getStatusCode() {
         return this.statusCode;
     }
 
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
     public String getErrorMsg() {
         return this.errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     public BaseException getException() {
         return this.exception;
     }
 
+    public void setException(BaseException exception) {
+        this.exception = exception;
+    }
+
     public Map<TableStat.Name, TableStat> getTableStatMap() {
         return this.tableStatMap;
+    }
+
+    public void setTableStatMap(Map<TableStat.Name, TableStat> tableStatMap) {
+        this.tableStatMap = tableStatMap;
     }
 
     public String getDbType() {
         return this.dbType;
     }
 
+    public void setDbType(String dbType) {
+        this.dbType = dbType;
+    }
+
     public boolean isHasDuplicated() {
         return this.hasDuplicated;
+    }
+
+    public void setHasDuplicated(boolean hasDuplicated) {
+        this.hasDuplicated = hasDuplicated;
     }
 
     public boolean isHasDuplicatedSqlTagId() {
         return this.hasDuplicatedSqlTagId;
     }
 
+    public void setHasDuplicatedSqlTagId(boolean hasDuplicatedSqlTagId) {
+        this.hasDuplicatedSqlTagId = hasDuplicatedSqlTagId;
+    }
+
     public boolean isExistSubSqlTagId() {
         return this.existSubSqlTagId;
     }
 
+    public void setExistSubSqlTagId(boolean existSubSqlTagId) {
+        this.existSubSqlTagId = existSubSqlTagId;
+    }
+
     public boolean isExistSubSqlTagIdDuplicated() {
         return this.existSubSqlTagIdDuplicated;
+    }
+
+    public void setExistSubSqlTagIdDuplicated(boolean existSubSqlTagIdDuplicated) {
+        this.existSubSqlTagIdDuplicated = existSubSqlTagIdDuplicated;
     }
 }

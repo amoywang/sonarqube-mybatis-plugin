@@ -18,146 +18,32 @@ public class XmlPluginRuleResult {
     private String filePath;
     private Integer lineNumber;
 
-    public void setLineNumber(Integer line) {
-        this.lineNumber = line;
+    XmlPluginRuleResult(String mapperName, String sqlNodeId, String sqlNodeIdOrg, String sqlText,
+                        String nodeOptType, String druidFormatSql, String parseResult,
+                        RuleCodeEnum ruleCodeEnum, String dbType, String filePath, Integer lineNumber) {
+        this.mapperName = mapperName;
+        this.sqlNodeId = sqlNodeId;
+        this.sqlNodeIdOrg = sqlNodeIdOrg;
+        this.sqlText = sqlText;
+        this.nodeOptType = nodeOptType;
+        this.druidFormatSql = druidFormatSql;
+        this.parseResult = parseResult;
+        this.ruleCodeEnum = ruleCodeEnum;
+        this.dbType = dbType;
+        this.filePath = filePath;
+        this.lineNumber = lineNumber;
+    }
+
+    public static XmlPluginRuleResultBuilder builder() {
+        return new XmlPluginRuleResultBuilder();
     }
 
     public Integer getLineNumber() {
         return this.lineNumber;
     }
 
-    public static class XmlPluginRuleResultBuilder {
-        private String mapperName;
-        private String sqlNodeId;
-        private String sqlNodeIdOrg;
-        private String sqlText;
-        private String nodeOptType;
-        private String druidFormatSql;
-        private String parseResult;
-        private RuleCodeEnum ruleCodeEnum;
-        private String dbType;
-        private String filePath;
-        private Integer lineNumber;
-
-        public void setLineNumber(Integer line) {
-            this.lineNumber = line;
-        }
-
-        public Integer getLineNumber() {
-            return this.lineNumber;
-        }
-
-        XmlPluginRuleResultBuilder() {
-        }
-
-        public XmlPluginRuleResultBuilder mapperName(String mapperName) {
-            this.mapperName = mapperName;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder sqlNodeId(String sqlNodeId) {
-            this.sqlNodeId = sqlNodeId;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder sqlNodeIdOrg(String sqlNodeIdOrg) {
-            this.sqlNodeIdOrg = sqlNodeIdOrg;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder sqlText(String sqlText) {
-            this.sqlText = sqlText;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder nodeOptType(String nodeOptType) {
-            this.nodeOptType = nodeOptType;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder druidFormatSql(String druidFormatSql) {
-            this.druidFormatSql = druidFormatSql;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder parseResult(String parseResult) {
-            this.parseResult = parseResult;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder ruleCodeEnum(RuleCodeEnum ruleCodeEnum) {
-            this.ruleCodeEnum = ruleCodeEnum;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder dbType(String dbType) {
-            this.dbType = dbType;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder filePath(String filePath) {
-            this.filePath = filePath;
-            return this;
-        }
-
-        public XmlPluginRuleResultBuilder lineNumber(String filePath) {
-            this.lineNumber = IOUtils.getLineNumber(filePath, this.sqlNodeId);
-            return this;
-        }
-
-        public XmlPluginRuleResult build() {
-            return new XmlPluginRuleResult(this.mapperName, this.sqlNodeId, this.sqlNodeIdOrg,
-                    this.sqlText, this.nodeOptType, this.druidFormatSql, this.parseResult,
-                    this.ruleCodeEnum, this.dbType, this.filePath, this.lineNumber);
-        }
-
-        public String toString() {
-            return "XmlPluginRuleResult.XmlPluginRuleResultBuilder(mapperName=" + this.mapperName + ", sqlNodeId=" + this.sqlNodeId
-                    + ", sqlNodeIdOrg=" + this.sqlNodeIdOrg + ", sqlText=" + this.sqlText
-                    + ", nodeOptType=" + this.nodeOptType + ", druidFormatSql=" + this.druidFormatSql
-                    + ", parseResult=" + this.parseResult + ", ruleCodeEnum=" + this.ruleCodeEnum
-                    + ", dbType=" + this.dbType + ", filePath=" + this.filePath + ")";
-        }
-    }
-
-    public void setMapperName(String mapperName) {
-        this.mapperName = mapperName;
-    }
-
-    public void setSqlNodeId(String sqlNodeId) {
-        this.sqlNodeId = sqlNodeId;
-    }
-
-    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
-        this.sqlNodeIdOrg = sqlNodeIdOrg;
-    }
-
-    public void setSqlText(String sqlText) {
-        this.sqlText = sqlText;
-    }
-
-    public void setNodeOptType(String nodeOptType) {
-        this.nodeOptType = nodeOptType;
-    }
-
-    public void setDruidFormatSql(String druidFormatSql) {
-        this.druidFormatSql = druidFormatSql;
-    }
-
-    public void setParseResult(String parseResult) {
-        this.parseResult = parseResult;
-    }
-
-    public void setRuleCodeEnum(RuleCodeEnum ruleCodeEnum) {
-        this.ruleCodeEnum = ruleCodeEnum;
-    }
-
-    public void setDbType(String dbType) {
-        this.dbType = dbType;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setLineNumber(Integer line) {
+        this.lineNumber = line;
     }
 
     public boolean equals(Object o) {
@@ -291,64 +177,84 @@ public class XmlPluginRuleResult {
                 + ", ruleCodeEnum=" + getRuleCodeEnum() + ", dbType=" + getDbType() + ", filePath=" + getFilePath() + ")";
     }
 
-    XmlPluginRuleResult(String mapperName, String sqlNodeId, String sqlNodeIdOrg, String sqlText,
-                        String nodeOptType, String druidFormatSql, String parseResult,
-                        RuleCodeEnum ruleCodeEnum, String dbType, String filePath, Integer lineNumber) {
-        this.mapperName = mapperName;
-        this.sqlNodeId = sqlNodeId;
-        this.sqlNodeIdOrg = sqlNodeIdOrg;
-        this.sqlText = sqlText;
-        this.nodeOptType = nodeOptType;
-        this.druidFormatSql = druidFormatSql;
-        this.parseResult = parseResult;
-        this.ruleCodeEnum = ruleCodeEnum;
-        this.dbType = dbType;
-        this.filePath = filePath;
-        this.lineNumber = lineNumber;
-    }
-
-    public static XmlPluginRuleResultBuilder builder() {
-        return new XmlPluginRuleResultBuilder();
-    }
-
     public String getMapperName() {
         return this.mapperName;
+    }
+
+    public void setMapperName(String mapperName) {
+        this.mapperName = mapperName;
     }
 
     public String getSqlNodeId() {
         return this.sqlNodeId;
     }
 
+    public void setSqlNodeId(String sqlNodeId) {
+        this.sqlNodeId = sqlNodeId;
+    }
+
     public String getSqlNodeIdOrg() {
         return this.sqlNodeIdOrg;
+    }
+
+    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
+        this.sqlNodeIdOrg = sqlNodeIdOrg;
     }
 
     public String getSqlText() {
         return this.sqlText;
     }
 
+    public void setSqlText(String sqlText) {
+        this.sqlText = sqlText;
+    }
+
     public String getNodeOptType() {
         return this.nodeOptType;
+    }
+
+    public void setNodeOptType(String nodeOptType) {
+        this.nodeOptType = nodeOptType;
     }
 
     public String getDruidFormatSql() {
         return this.druidFormatSql;
     }
 
+    public void setDruidFormatSql(String druidFormatSql) {
+        this.druidFormatSql = druidFormatSql;
+    }
+
     public String getParseResult() {
         return this.parseResult;
+    }
+
+    public void setParseResult(String parseResult) {
+        this.parseResult = parseResult;
     }
 
     public RuleCodeEnum getRuleCodeEnum() {
         return this.ruleCodeEnum;
     }
 
+    public void setRuleCodeEnum(RuleCodeEnum ruleCodeEnum) {
+        this.ruleCodeEnum = ruleCodeEnum;
+    }
+
     public String getDbType() {
         return this.dbType;
     }
 
+    public void setDbType(String dbType) {
+        this.dbType = dbType;
+    }
+
     public String getFilePath() {
         return this.filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public String getSqlStr() {
@@ -356,5 +262,99 @@ public class XmlPluginRuleResult {
             return this.sqlText;
         }
         return this.druidFormatSql;
+    }
+
+    public static class XmlPluginRuleResultBuilder {
+        private String mapperName;
+        private String sqlNodeId;
+        private String sqlNodeIdOrg;
+        private String sqlText;
+        private String nodeOptType;
+        private String druidFormatSql;
+        private String parseResult;
+        private RuleCodeEnum ruleCodeEnum;
+        private String dbType;
+        private String filePath;
+        private Integer lineNumber;
+
+        XmlPluginRuleResultBuilder() {
+        }
+
+        public Integer getLineNumber() {
+            return this.lineNumber;
+        }
+
+        public void setLineNumber(Integer line) {
+            this.lineNumber = line;
+        }
+
+        public XmlPluginRuleResultBuilder mapperName(String mapperName) {
+            this.mapperName = mapperName;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder sqlNodeId(String sqlNodeId) {
+            this.sqlNodeId = sqlNodeId;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder sqlNodeIdOrg(String sqlNodeIdOrg) {
+            this.sqlNodeIdOrg = sqlNodeIdOrg;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder sqlText(String sqlText) {
+            this.sqlText = sqlText;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder nodeOptType(String nodeOptType) {
+            this.nodeOptType = nodeOptType;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder druidFormatSql(String druidFormatSql) {
+            this.druidFormatSql = druidFormatSql;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder parseResult(String parseResult) {
+            this.parseResult = parseResult;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder ruleCodeEnum(RuleCodeEnum ruleCodeEnum) {
+            this.ruleCodeEnum = ruleCodeEnum;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder dbType(String dbType) {
+            this.dbType = dbType;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder filePath(String filePath) {
+            this.filePath = filePath;
+            return this;
+        }
+
+        public XmlPluginRuleResultBuilder lineNumber(String filePath) {
+            this.lineNumber = IOUtils.getLineNumber(filePath, this.sqlNodeId);
+            return this;
+        }
+
+        public XmlPluginRuleResult build() {
+            return new XmlPluginRuleResult(this.mapperName, this.sqlNodeId, this.sqlNodeIdOrg,
+                    this.sqlText, this.nodeOptType, this.druidFormatSql, this.parseResult,
+                    this.ruleCodeEnum, this.dbType, this.filePath, this.lineNumber);
+        }
+
+        public String toString() {
+            return "XmlPluginRuleResult.XmlPluginRuleResultBuilder(mapperName=" + this.mapperName + ", sqlNodeId=" + this.sqlNodeId
+                    + ", sqlNodeIdOrg=" + this.sqlNodeIdOrg + ", sqlText=" + this.sqlText
+                    + ", nodeOptType=" + this.nodeOptType + ", druidFormatSql=" + this.druidFormatSql
+                    + ", parseResult=" + this.parseResult + ", ruleCodeEnum=" + this.ruleCodeEnum
+                    + ", dbType=" + this.dbType + ", filePath=" + this.filePath + ")";
+        }
     }
 }

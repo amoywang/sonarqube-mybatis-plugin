@@ -4,7 +4,7 @@ import org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode;
 import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 
 public class ZChooseNode extends BaseMybatisNode {
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (INode sonNode : this.sonParseResult) {

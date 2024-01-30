@@ -12,46 +12,6 @@ public class XmlNode implements IXmlNodes {
     private boolean hasDuplicatedXmlNode;
     private boolean hasDuplicatedSqlTagId;
 
-    public void setSqlNodeId(String sqlNodeId) {
-        this.sqlNodeId = sqlNodeId;
-    }
-
-    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
-        this.sqlNodeIdOrg = sqlNodeIdOrg;
-    }
-
-    public void setNameSpace(String nameSpace) {
-        this.nameSpace = nameSpace;
-    }
-
-    public void setNodeOptType(String nodeOptType) {
-        this.nodeOptType = nodeOptType;
-    }
-
-    public void setSqlComments(String sqlComments) {
-        this.sqlComments = sqlComments;
-    }
-
-    public void setNodeAsXml(String nodeAsXml) {
-        this.nodeAsXml = nodeAsXml;
-    }
-
-    public void setMapperType(String mapperType) {
-        this.mapperType = mapperType;
-    }
-
-    public void setXmlFilePath(String xmlFilePath) {
-        this.xmlFilePath = xmlFilePath;
-    }
-
-    public void setHasDuplicatedXmlNode(boolean hasDuplicatedXmlNode) {
-        this.hasDuplicatedXmlNode = hasDuplicatedXmlNode;
-    }
-
-    public void setHasDuplicatedSqlTagId(boolean hasDuplicatedSqlTagId) {
-        this.hasDuplicatedSqlTagId = hasDuplicatedSqlTagId;
-    }
-
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -169,39 +129,79 @@ public class XmlNode implements IXmlNodes {
         return this.sqlNodeId;
     }
 
+    public void setSqlNodeId(String sqlNodeId) {
+        this.sqlNodeId = sqlNodeId;
+    }
+
     public String getSqlNodeIdOrg() {
         return this.sqlNodeIdOrg;
+    }
+
+    public void setSqlNodeIdOrg(String sqlNodeIdOrg) {
+        this.sqlNodeIdOrg = sqlNodeIdOrg;
     }
 
     public String getNameSpace() {
         return this.nameSpace;
     }
 
+    public void setNameSpace(String nameSpace) {
+        this.nameSpace = nameSpace;
+    }
+
     public String getNodeOptType() {
         return this.nodeOptType;
+    }
+
+    public void setNodeOptType(String nodeOptType) {
+        this.nodeOptType = nodeOptType;
     }
 
     public String getSqlComments() {
         return this.sqlComments;
     }
 
+    public void setSqlComments(String sqlComments) {
+        this.sqlComments = sqlComments;
+    }
+
     public String getNodeAsXml() {
         return this.nodeAsXml;
+    }
+
+    public void setNodeAsXml(String nodeAsXml) {
+        this.nodeAsXml = nodeAsXml;
     }
 
     public String getMapperType() {
         return this.mapperType;
     }
 
+    public void setMapperType(String mapperType) {
+        this.mapperType = mapperType;
+    }
+
     public String getXmlFilePath() {
         return this.xmlFilePath;
+    }
+
+    public void setXmlFilePath(String xmlFilePath) {
+        this.xmlFilePath = xmlFilePath;
     }
 
     public boolean isHasDuplicatedXmlNode() {
         return this.hasDuplicatedXmlNode;
     }
 
+    public void setHasDuplicatedXmlNode(boolean hasDuplicatedXmlNode) {
+        this.hasDuplicatedXmlNode = hasDuplicatedXmlNode;
+    }
+
     public boolean isHasDuplicatedSqlTagId() {
         return this.hasDuplicatedSqlTagId;
+    }
+
+    public void setHasDuplicatedSqlTagId(boolean hasDuplicatedSqlTagId) {
+        this.hasDuplicatedSqlTagId = hasDuplicatedSqlTagId;
     }
 }

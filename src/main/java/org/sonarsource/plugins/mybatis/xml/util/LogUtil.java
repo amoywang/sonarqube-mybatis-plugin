@@ -15,9 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public enum LogUtil {
-    ;
-
+public class LogUtil {
     private static final Logger logger = LoggerFactory.getLogger(LogUtil.class);
 
     public static void logAll(List<BaseResult> result, String logPath) throws Exception {

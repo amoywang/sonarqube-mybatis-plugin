@@ -16,103 +16,103 @@ public class BaseIbatisNode implements INode {
     public boolean propertyConfilct = false;
     public List<INode> sonParseResult = new ArrayList();
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toString() {
         return "";
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toHtmlString() {
         return "";
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSonParseResult(List<INode> sonParseResult) {
         this.sonParseResult = sonParseResult;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
-    public void setPrepend(String prepend) {
-        this.prepend = prepend;
-    }
-
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setOpen(String open) {
         this.open = open;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setClose(String close) {
         this.close = close;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setProperty(String property) {
         this.property = property;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setRemoveFirstPrepend(boolean removeFirstPrepend) {
         this.removeFirstPrepend = removeFirstPrepend;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCompareProperty(String compareProperty) {
         this.compareProperty = compareProperty;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCompareValue(String compareValue) {
         this.compareValue = compareValue;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setConjunction(String conjunction) {
         this.conjunction = conjunction;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setTest(String test) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setPrefix(String prefix) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSuffix(String suffix) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setPrefixOverrides(String prefixOverrides) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSuffixOverrides(String suffixOverrides) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setItem(String item) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setIndex(String index) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCollection(String collection) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSaparator(String saparator) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setConfilct(String type) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String getPrepend() {
         return null;
+    }
+
+    @Override
+    public void setPrepend(String prepend) {
+        this.prepend = prepend;
     }
 }

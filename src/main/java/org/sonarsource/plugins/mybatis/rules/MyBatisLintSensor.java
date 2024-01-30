@@ -12,13 +12,13 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.xml.Xml;
-import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
 import org.sonarsource.plugins.mybatis.regular.enums.RuleCodeEnum;
 import org.sonarsource.plugins.mybatis.regular.parser.RegularRuleHandler;
-import org.sonarsource.plugins.mybatis.xml.XmlBatisSqlParser;
-import org.sonarsource.plugins.mybatis.xml.XmlParseResult;
 import org.sonarsource.plugins.mybatis.regular.pojo.XmlPluginRuleResult;
 import org.sonarsource.plugins.mybatis.regular.pojo.XmlPluginRuleResultAll;
+import org.sonarsource.plugins.mybatis.sql.pojo.RuleCheckResult;
+import org.sonarsource.plugins.mybatis.xml.XmlBatisSqlParser;
+import org.sonarsource.plugins.mybatis.xml.XmlParseResult;
 import org.sonarsource.plugins.mybatis.xml.pojo.XmlNodeParserResult;
 
 import java.util.ArrayList;
@@ -46,8 +46,8 @@ public class MyBatisLintSensor implements Sensor {
 
     protected final Configuration config;
     protected final FileSystem fileSystem;
-    protected SensorContext context;
     private final List<String> stmtIdExcludeList = new ArrayList<>();
+    protected SensorContext context;
 
     /**
      * Use of IoC to get Settings, FileSystem, RuleFinder and ResourcePerspectives
@@ -55,6 +55,10 @@ public class MyBatisLintSensor implements Sensor {
     public MyBatisLintSensor(final Configuration config, final FileSystem fileSystem) {
         this.config = config;
         this.fileSystem = fileSystem;
+    }
+
+    private static String getRepositoryKeyForLanguage() {
+        return MyBatisLintRulesDefinition.REPO_KEY;
     }
 
     @Override
@@ -146,10 +150,6 @@ public class MyBatisLintSensor implements Sensor {
         newIssue.at(primaryLocation);
 
         newIssue.save();
-    }
-
-    private static String getRepositoryKeyForLanguage() {
-        return MyBatisLintRulesDefinition.REPO_KEY;
     }
 
     @Override

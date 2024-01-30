@@ -4,10 +4,10 @@ package org.sonarsource.plugins.mybatis.xml.exception;
 import org.sonarsource.plugins.mybatis.xml.exception.base.BaseException;
 
 public class DruidParseException extends BaseException {
-    private static final long serialVersionUID = -4762181054514075992L;
+    private static final long serialVersionUID = 189796715157251L;
+    private final Exception ex;
     private String msg;
     private Integer code;
-    private final Exception ex;
 
     public DruidParseException(Exception ex) {
         this.ex = ex;

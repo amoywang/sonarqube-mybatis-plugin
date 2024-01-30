@@ -13,17 +13,23 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, read_protocol,user_id, nick_name
+        id
+        , read_protocol,user_id, nick_name
     </sql>
     <sql id="Base_Column_List">
-        id, read_protocol,user_id, nick_name
+        id
+        , read_protocol,user_id, nick_name
     </sql>
     <select id="getByUserId" resultType="com.example.repository.impl.user.po.UserPO">
-        select * from ssp_user where user_id =#{id}
+        select *
+        from ssp_user
+        where user_id = #{id}
     </select>
 
     <update id="updateUserAvatar">
-        update ssp_user u set u.avatar =#{userPO.avatar} where u.user_id =#{userPO.userId}
+        update ssp_user u
+        set u.avatar =#{userPO.avatar}
+        where u.user_id = #{userPO.userId}
     </update>
 
     <resultMap id="userQueryPageMap" type="com.example.system.dto.response.SystemUserPageQueryDTO">
@@ -76,12 +82,17 @@
     </select>
 
     <select id="getById" resultType="com.example.repository.impl.user.po.UserPO">
-        select id from ssp_user where id =${id}
+        select id
+        from ssp_user
+        where id = ${id}
     </select>
     <delete id="getByIdEX12" resultType="com.example.repository.impl.user.po.UserPO">
-        delete  from ssp_user
+        delete
+        from ssp_user
     </delete>
     <delete id="getByIdEX" resultType="com.example.repository.impl.user.po.UserPO">
-        delete  from ssp_user where id =${id}
+        delete
+        from ssp_user
+        where id = ${id}
     </delete>
 </mapper>

@@ -5,8 +5,8 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.plugins.xml.Xml;
-import org.sonarsource.plugins.mybatis.sql.AbstractRule;
 import org.sonarsource.plugins.mybatis.regular.enums.RuleCodeEnum;
+import org.sonarsource.plugins.mybatis.sql.AbstractRule;
 
 import java.util.ServiceLoader;
 

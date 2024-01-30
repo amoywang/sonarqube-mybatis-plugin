@@ -7,7 +7,7 @@ import org.sonarsource.plugins.mybatis.xml.node.base.INode;
 import org.sonarsource.plugins.mybatis.xml.node.commom.TextNode;
 
 public class ZSetNode extends BaseMybatisNode {
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append(" set ");
@@ -45,7 +45,6 @@ public class ZSetNode extends BaseMybatisNode {
     }
 
     @Override
-    // org.sonarsource.plugins.mybatis.xml.node.base.BaseMybatisNode, org.sonarsource.plugins.mybatis.xml.node.base.INode
     public String toHtmlString() {
         StringBuilder result = new StringBuilder();
         result.append(" set ");

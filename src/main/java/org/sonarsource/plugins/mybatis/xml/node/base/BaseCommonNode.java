@@ -13,8 +13,6 @@ public class BaseCommonNode implements INode {
     public String prepend = "";
     public String open = "";
     public String close = "";
-    boolean removeFirstPrepend = false;
-    boolean propertyConfilct = false;
     public String test = "";
     public String prefix = "";
     public String suffix = "";
@@ -24,21 +22,23 @@ public class BaseCommonNode implements INode {
     public String index = "";
     public String collection = "";
     public String separator = "";
+    boolean removeFirstPrepend = false;
+    boolean propertyConfilct = false;
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String toHtmlString() {
         return "";
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setProperty(String property) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setConfilct(String type) {
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSaparator(String saparator) {
     }
 
@@ -54,7 +54,7 @@ public class BaseCommonNode implements INode {
         return this.sonParseResult;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSonParseResult(List<INode> sonParseResult) {
         this.sonParseResult = sonParseResult;
     }
@@ -67,12 +67,12 @@ public class BaseCommonNode implements INode {
         this.stringValue = stringValue;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public String getPrepend() {
         return this.prepend;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setPrepend(String prepend) {
         this.prepend = prepend;
     }
@@ -81,7 +81,7 @@ public class BaseCommonNode implements INode {
         return this.open;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setOpen(String open) {
         this.open = open;
     }
@@ -90,7 +90,7 @@ public class BaseCommonNode implements INode {
         return this.close;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setClose(String close) {
         this.close = close;
     }
@@ -99,7 +99,7 @@ public class BaseCommonNode implements INode {
         return this.removeFirstPrepend;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setRemoveFirstPrepend(boolean removeFirstPrepend) {
         this.removeFirstPrepend = removeFirstPrepend;
     }
@@ -108,7 +108,7 @@ public class BaseCommonNode implements INode {
         return this.compareProperty;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCompareProperty(String compareProperty) {
         this.compareProperty = compareProperty;
     }
@@ -117,7 +117,7 @@ public class BaseCommonNode implements INode {
         return this.compareValue;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCompareValue(String compareValue) {
         this.compareValue = compareValue;
     }
@@ -126,7 +126,7 @@ public class BaseCommonNode implements INode {
         return this.conjunction;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setConjunction(String conjunction) {
         this.conjunction = conjunction;
     }
@@ -143,7 +143,7 @@ public class BaseCommonNode implements INode {
         return this.test;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setTest(String test) {
         this.test = test;
     }
@@ -152,7 +152,7 @@ public class BaseCommonNode implements INode {
         return this.prefix;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
@@ -161,7 +161,7 @@ public class BaseCommonNode implements INode {
         return this.suffix;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSuffix(String suffix) {
         this.suffix = suffix;
     }
@@ -170,7 +170,7 @@ public class BaseCommonNode implements INode {
         return this.prefixOverrides;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setPrefixOverrides(String prefixOverrides) {
         this.prefixOverrides = prefixOverrides;
     }
@@ -179,7 +179,7 @@ public class BaseCommonNode implements INode {
         return this.suffixOverrides;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setSuffixOverrides(String suffixOverrides) {
         this.suffixOverrides = suffixOverrides;
     }
@@ -188,7 +188,7 @@ public class BaseCommonNode implements INode {
         return this.item;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setItem(String item) {
         this.item = item;
     }
@@ -197,7 +197,7 @@ public class BaseCommonNode implements INode {
         return this.index;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setIndex(String index) {
         this.index = index;
     }
@@ -206,7 +206,7 @@ public class BaseCommonNode implements INode {
         return this.collection;
     }
 
-    @Override // org.sonarsource.plugins.mybatis.xml.node.base.INode
+    @Override
     public void setCollection(String collection) {
         this.collection = collection;
     }
