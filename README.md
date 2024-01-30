@@ -3,20 +3,29 @@
 MyBatis Mapper XML Plugin for SonarQube: Rules to check SQL statements in MyBatis Mapper XML files.
 
 ## What is Risk SQL?
-Risk SQL is that in the mybatis mapper file, there are some dynamic SQL, such as `<if test=""></if>` elements of Mapper file, 
-if all parameters in the SQL statement elements of Mapper XML file are null , the SQL may at great risk.
+Risk SQL is that in the mybatis mapper file, there are some dynamic SQL.
 
-an example as follows:
+two example as follows:
 
 ```
+# example 1
+# if all <if> conditon is null,will delete all data
+
 DELETE FROM table_name
-WHERE 1=1
+WHERE 8=8
 <if test="startTime != null">
     AND start_time <![CDATA[=]]> #{startTime}
 </if>
 <if test="endTime != null">
     AND end_time <![CDATA[=]]> #{endTime}
 </if>
+
+# example 2
+# 1.sql injection risk: should use #{queryParam} in replace
+# 2.should not use [*] to query all column
+
+SELECT * FROM user where user.name = ${queryParam}
+
 ```
 
 ## MyBatis Rules
