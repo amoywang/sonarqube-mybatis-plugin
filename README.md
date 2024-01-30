@@ -36,8 +36,7 @@ There are 23 built-in mybatis rules
 
 ## How to install it?
 There are two options to install a plugin into SonarQube:
-- Marketplace - Installs plugins automatically, from the SonarQube UI.
-- Manual Installation - You'll use this method if your SonarQube instance doesn't have access to the Internet.
+- Manual Installation - place the plugin jar to sonarqube plugin dir
 
 ## How to Use it?
 There is an example of using maven build command:
