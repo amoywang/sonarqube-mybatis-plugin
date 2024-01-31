@@ -68,7 +68,7 @@ If you want to skip mybatis sensor sometimes, you can change the global properti
 
 ## Future Feature
 - add more sql check rule
-- support ibatis xml check
+- support java language sql static scanning
 
 ## Support Author
 
